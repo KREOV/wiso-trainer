@@ -439,3 +439,5 @@ input,textarea{-webkit-user-select:text;user-select:text;font-size:16px}
 [data-theme=dark] .fb.bad h3{color:#FF9FB2}[data-theme=dark] .fb.ok h3{color:#86EFAC}
 [data-theme=dark] .why b{color:#fff}[data-theme=dark] .qt{background:rgba(255,255,255,.1);color:var(--ink)}
 [data-theme=dark] .lbl{color:#B9B4E6}
+.mask .o-hut{position:absolute;left:50%;top:-24%;font-size:56cqw;line-height:1;transform:translateX(-50%) rotate(-8deg);pointer-events:none;width:auto}
+.mask .o-acc{position:absolute;left:-16%;bottom:-2%;font-size:38cqw;line-height:1;pointer-events:none;width:auto}
