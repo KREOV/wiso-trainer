@@ -54,10 +54,10 @@ function karte(){
   </div>`);
 }
 function weltMenu(k){const w=W[k];
-  layer(`<div class="dim" data-act="close"><div class="sheet" style="--c:${w.c};--cd:${w.cd}" onclick="event.stopPropagation()"><span class="tag">${w.ic} ${w.name}</span><h2>${TH[k].name}</h2><p style="color:var(--muted);margin:0">${RUNDE} Fragen · ${HERZEN} Herzen · kam in ${TH[k].freq} Prüfungen</p>${sterne(S.stars[k]||0)}
+  layer(`<div class="dim" data-act="close"><div class="sheet" style="--c:${w.c};--cd:${w.cd}"><span class="tag">${w.ic} ${w.name}</span><h2>${TH[k].name}</h2><p style="color:var(--muted);margin:0">${RUNDE} Fragen · ${HERZEN} Herzen · kam in ${TH[k].freq} Prüfungen</p>${sterne(S.stars[k]||0)}
   <div class="btns"><button class="btn" data-play="${k}">▶ Spielen</button><button class="btn light" data-lern="${k}">📖 Spickzettel lesen</button><button class="btn light" data-act="close">Zurück zur Karte</button></div></div></div>`)}
 function spick(k){const w=W[k];
-  layer(`<div class="dim" data-act="close"><div class="sheet lern" style="--c:${w.c};--cd:${w.cd}" onclick="event.stopPropagation()"><span class="tag">${w.ic} Spickzettel</span><h2>${TH[k].name}</h2>${LERN[k]}
+  layer(`<div class="dim" data-act="close"><div class="sheet lern" style="--c:${w.c};--cd:${w.cd}"><span class="tag">${w.ic} Spickzettel</span><h2>${TH[k].name}</h2>${LERN[k]}
   <div class="btns"><button class="btn" data-play="${k}">▶ Jetzt spielen</button><button class="btn light" data-act="close">Schließen</button></div></div></div>`)}
 
 /* ---------- Runde ---------- */
