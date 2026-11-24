@@ -134,9 +134,9 @@ function pruefen(){
     plus=xpGeben(10*m+(schnell?5:0));R.knete+=2;S.knete+=2}
   else{R.combo=0;S.serie=0}
   save();
-  if(M.still){R.verlauf=(R.verlauf||[]).concat([{q,ok}]);sfx('tap');haptic();return setTimeout(()=>{if(!R)return;if(R.i+1>=R.n)return ende();R.i++;frage()},180)}
+  if(M.still){const ich=R.i,rr=R;sfx('tap');haptic();return setTimeout(()=>{if(R!==rr||R.i!==ich)return;if(R.i+1>=R.n)return ende();R.i++;frage()},180)}
   if(M.blitz){sfx(ok?'ok':'heart');haptic(ok?1:2);flash(ok?'ok':'bad');if(ok){emojis(['⚡','✨'],6,cx0,cy0-40,160);xpFly(plus,chk)}else quake();
-    return setTimeout(()=>{if(!R||!R.ende||Date.now()>=R.ende)return;R.i++;if(R.i>=R.list.length)R.list.push(...shuffle(R.pool));frage()},ok?380:700)}
+    const ich=R.i,rr=R;return setTimeout(()=>{if(R!==rr||R.i!==ich||!R.ende||Date.now()>=R.ende)return;R.i++;if(R.i>=R.list.length)R.list.push(...shuffle(R.pool));frage()},ok?380:700)}
   if(ok){sfx('ok');haptic();flash('ok');konfetti(R.combo>=3?150:80,cx0,cy0);emojis(['✨','💸','⭐','🤑'],10,cx0,cy0-40,200);xpFly(plus,chk);
     if(R.combo===3||R.combo===5||(R.combo>5&&R.combo%5===0)){setTimeout(()=>{slam(`COMBO x${R.combo>=5?3:2}`);sfx('combo');haptic(2);emojis(['🔥'],22,innerWidth/2,innerHeight/2,360)},250);line=pick(SAY.combo);mood='cool';hand='🤘'}
     else if(schnell){line=pick(SAY.schnell);mood='cool';hand='⚡';sfx('schnell',200)}

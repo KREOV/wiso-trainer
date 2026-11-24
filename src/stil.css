@@ -427,3 +427,6 @@ input,textarea{-webkit-user-select:text;user-select:text;font-size:16px}
 [data-theme=dark] #splash{background:linear-gradient(160deg,rgba(15,12,41,.8),rgba(43,15,61,.8))}[data-theme=dark] #splash h1{color:#fff}
 [data-theme=dark] .sw i{background:#3A3470}[data-theme=dark] .seg{background:rgba(255,255,255,.06)}[data-theme=dark] .zur{background:rgba(255,255,255,.12)}
 [data-theme=dark] .la i{background:#3A3470}[data-theme=dark] .hc{background:rgba(167,139,250,.15)}
+/* Kopfleiste immer einzeilig */
+.top{flex-wrap:nowrap}.top .lvl{flex:1 1 40px;min-width:0}.top .xpbar{min-width:16px}
+@media (max-width:440px){.top{gap:6px}.top .badge{padding:6px 8px;font-size:13px;gap:4px}.top .snd{width:36px;height:36px;font-size:16px;flex:none}.lvl .ring{width:36px;height:36px;font-size:16px}}
