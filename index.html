@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="WiSo Trainer">
+<meta name="robots" content="noindex">
+<title>WiSo Trainer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: ein Prüfungsbogen in der Mitte, oben Punktestand, darunter Startseite, Erklärung oder Aufgabe */
+:root{
+  --bg:#EEF1F6; --sheet:#FFFFFF; --ink:#14213D; --muted:#5B6478; --line:#D7DDE8; --soft:#F5F7FB;
+  --accent:#1F4FD1; --accent-ink:#FFFFFF; --ok:#12805A; --ok-bg:#DDF5EA; --bad:#C2362B; --bad-bg:#FDE5E2;
+  --t1:#E2483D; --t2:#2F6FE4; --t3:#14946A; --t4:#7A4FE0; --t5:#D98200;
+  --f-head:"Space Grotesk","Inter",system-ui,sans-serif; --f-body:"Inter",system-ui,-apple-system,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1320; --sheet:#161D2D; --ink:#E7ECF5; --muted:#9AA4BA; --line:#2A3449; --soft:#1C2537;
+  --accent:#7DA2FF; --accent-ink:#0E1320; --ok:#46D19A; --ok-bg:#173A2E; --bad:#FF8478; --bad-bg:#40201F;
+  --t1:#FF7A6E; --t2:#7DA2FF; --t3:#46D19A; --t4:#B59BFF; --t5:#FFB547; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1320; --sheet:#161D2D; --ink:#E7ECF5; --muted:#9AA4BA; --line:#2A3449; --soft:#1C2537;
+  --accent:#7DA2FF; --accent-ink:#0E1320; --ok:#46D19A; --ok-bg:#173A2E; --bad:#FF8478; --bad-bg:#40201F;
+  --t1:#FF7A6E; --t2:#7DA2FF; --t3:#46D19A; --t4:#B59BFF; --t5:#FFB547; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.5;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 40px}
+.wrap{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{font-family:var(--f-head);font-weight:700;font-size:24px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;cursor:pointer;background:none;border:0;color:var(--ink);padding:0}
+.logo .stamp{font-family:var(--f-mono);font-size:12px;font-weight:700;border:2px solid var(--ink);border-radius:6px;padding:2px 6px;letter-spacing:.06em}
+.stats{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.pill{font-family:var(--f-mono);font-size:14px;font-weight:700;background:var(--sheet);border:1px solid var(--line);border-radius:999px;padding:6px 12px;white-space:nowrap}
+.sheet{background:var(--sheet);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 1px 0 var(--line)}
+h1,h2,h3{font-family:var(--f-head);text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:30px;line-height:1.1} h2{font-size:22px} h3{font-size:18px}
+.lead{color:var(--muted);margin:6px 0 0}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.tile{border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--sheet);position:relative;overflow:hidden;min-width:0}
+.tile::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:var(--c)}
+.tile .top{display:flex;align-items:baseline;gap:8px}
+.tile .nr{font-family:var(--f-mono);font-weight:700;color:var(--c)}
+.tile .freq{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);font-family:var(--f-mono)}
+.bar{height:8px;border-radius:99px;background:var(--soft);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--c);width:0}
+.small{font-size:14px;color:var(--muted)}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+button,.btn{font:inherit;font-weight:700;border-radius:12px;border:1px solid var(--line);background:var(--soft);color:var(--ink);padding:12px 16px;min-height:48px;cursor:pointer;touch-action:manipulation}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.ghost{background:transparent}
+.big{width:100%;font-size:18px;min-height:56px}
+.special{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+@media (max-width:560px){.special{grid-template-columns:1fr}}
+.special button{text-align:left;padding:16px;display:flex;flex-direction:column;gap:4px}
+.special button span{font-weight:500;font-size:14px;color:inherit;opacity:.85}
+/* Aufgabe */
+.qhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.chip{font-family:var(--f-mono);font-size:13px;font-weight:700;color:#fff;background:var(--c);border-radius:8px;padding:4px 10px}
+.qnr{font-family:var(--f-mono);font-size:13px;color:var(--muted);font-weight:700}
+.qtext{font-size:18px;line-height:1.55}
+.qtext table{border-collapse:collapse;margin:10px 0;font-family:var(--f-mono);font-size:15px}
+.qtext td,.qtext th{border:1px solid var(--line);padding:6px 10px;text-align:right}
+.qtext th{background:var(--soft);font-weight:700}
+.tbl{overflow-x:auto}
+.ask{font-weight:700;margin-top:10px}
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.opt{display:flex;gap:14px;align-items:flex-start;text-align:left;font-weight:500;background:var(--sheet);padding:12px 14px}
+.opt .box{flex:none;width:34px;height:34px;border:2px solid var(--ink);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-weight:700}
+.opt.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.opt.sel .box{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.opt.right{border-color:var(--ok);background:var(--ok-bg)} .opt.right .box{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg)} .opt.wrong .box{background:var(--bad);border-color:var(--bad);color:#fff}
+.numin{display:flex;gap:10px;align-items:center;margin-top:16px;flex-wrap:wrap}
+.numin input{font-family:var(--f-mono);font-size:22px;font-weight:700;width:220px;max-width:100%;padding:10px 12px;border-radius:10px;border:2px solid var(--ink);background:var(--sheet);color:var(--ink)}
+.numin .unit{font-family:var(--f-mono);font-weight:700}
+.order-pool,.order-picked{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.order-picked .opt{border-style:dashed}
+.feedback{margin-top:18px;border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.feedback.ok{background:var(--ok-bg);border:1px solid var(--ok)} .feedback.bad{background:var(--bad-bg);border:1px solid var(--bad)}
+.feedback .verdict{font-family:var(--f-head);font-size:20px;font-weight:700}
+.feedback.ok .verdict{color:var(--ok)} .feedback.bad .verdict{color:var(--bad)}
+.why{font-size:16px;line-height:1.55}
+.why b{font-weight:800}
+.actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.actions button{flex:1 1 180px}
+/* Erklärung */
+.lern{display:flex;flex-direction:column;gap:14px}
+.card{border-radius:14px;padding:14px 16px;background:var(--soft);border-left:6px solid var(--c)}
+.card h3{margin-bottom:4px}
+.card p{margin:4px 0}
+.formel{font-family:var(--f-mono);font-weight:700;background:var(--ink);color:var(--sheet);border-radius:12px;padding:12px 14px;text-align:center;font-size:16px}
+.progress{display:flex;gap:4px}
+.progress i{flex:1;height:6px;border-radius:99px;background:var(--line)}
+.progress i.on{background:var(--accent)} .progress i.r{background:var(--ok)} .progress i.f{background:var(--bad)}
+.result{text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}
+.note{font-family:var(--f-head);font-size:72px;font-weight:700;line-height:1}
+@media (prefers-reduced-motion:no-preference){.sheet{animation:in .18s ease-out}@keyframes in{from{transform:translateY(4px);opacity:.6}to{transform:none;opacity:1}}}
+</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <button class="logo" id="home" aria-label="Zur Startseite"><span class="stamp">IHK</span>WiSo Trainer</button>
+    <div class="stats"><span class="pill" id="sPunkte">0 richtig</span><span class="pill" id="sSerie">Serie 0</span></div>
+  </header>
+  <main id="app"></main>
+</div>
+
+<script>
+/* ---------- Hilfen ---------- */
+const $=s=>document.querySelector(s);
+const rnd=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+const pick=a=>a[rnd(0,a.length-1)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=rnd(0,i);[a[i],a[j]]=[a[j],a[i]]}return a};
+const sample=(a,n)=>shuffle(a).slice(0,n);
+const fmt=(n,d=0)=>Number(n).toLocaleString('de-DE',{minimumFractionDigits:d,maximumFractionDigits:d});
+const DAY=86400000;
+const mkD=(y,m,d)=>new Date(Date.UTC(y,m-1,d));
+const addD=(dt,n)=>new Date(dt.getTime()+n*DAY);
+const fD=dt=>String(dt.getUTCDate()).padStart(2,'0')+'.'+String(dt.getUTCMonth()+1).padStart(2,'0')+'.'+dt.getUTCFullYear();
+const fT=m=>String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')+' Uhr';
+const NAMEN=['Lena','Tim','Mia','Jonas','Sara','Luca','Emma','Noah','Lea','Ben','Hannah','Paul','Elif','Max','Nele','Finn'];
+const norm=o=>typeof o==='string'?{t:o}:o;
+/* MC: richtige Antwort plus bis zu 4 falsche, gemischt */
+function mc(text,correct,wrongs,why,ask){
+  const c=norm(correct); const seen=new Set([c.t]); const w=sample(wrongs.map(norm).filter(x=>!seen.has(x.t)&&seen.add(x.t)),4);
+  const opts=shuffle([c,...w]); return {typ:'mc',text,ask,opts,ok:opts.indexOf(c),why};
+}
+function num(text,answer,tol,unit,why,ask){return {typ:'num',text,ask,answer,tol,unit,why}}
+
+/* ---------- Themen ---------- */
+const TH={
+ ezb:{nr:1,name:'EZB und Geldpolitik',kurz:'EZB',c:'var(--t1)',freq:'9 von 9'},
+ el:{nr:2,name:'Markt und Preiselastizität',kurz:'Markt',c:'var(--t2)',freq:'9 von 9'},
+ kon:{nr:3,name:'Konjunktur',kurz:'Konjunktur',c:'var(--t3)',freq:'9 von 9'},
+ recht:{nr:4,name:'Recht: Alter, Besitz, Verträge',kurz:'Recht',c:'var(--t4)',freq:'9 von 9'},
+ zahl:{nr:5,name:'Jugendschutz, Mutterschutz, Wahlen',kurz:'Zahlen',c:'var(--t5)',freq:'7 von 9'}
+};
+
+/* ---------- Generatoren: EZB ---------- */
+const RESTR=['Die EZB erhöht die Leitzinsen.','Die EZB verkauft Wertpapiere am offenen Markt.','Die EZB erhöht den Mindestreservesatz.'];
+const EXPAN=['Die EZB senkt die Leitzinsen.','Die EZB kauft in großem Umfang Staatsanleihen an.','Die EZB senkt den Mindestreservesatz.','Die EZB teilt bei den Hauptrefinanzierungsgeschäften mehr Liquidität zu.'];
+const EZB_SAETZE=[
+ {t:'Vorrangiges Ziel der EZB ist die Preisstabilität. Angestrebt wird mittelfristig eine Inflationsrate von 2 %.',ok:1,why:'Das steht so im EU-Vertrag. Die 2 % sind das Ziel der EZB.'},
+ {t:'Der Zinssatz der Spitzenrefinanzierungsfazilität bildet die Obergrenze für den Tagesgeldzins.',ok:1,why:'Teurer als dort leiht sich keine Bank über Nacht Geld. Deshalb ist es die Obergrenze.'},
+ {t:'Der Zinssatz der Einlagefazilität bildet die Untergrenze für den Tagesgeldzins.',ok:1,why:'Weniger als dort bekommt keine Bank für ihr Geld, sie würde es sonst bei der EZB parken. Deshalb ist es die Untergrenze.'},
+ {t:'Beim holländischen Zinstender erhalten alle Banken die Liquidität zum niedrigsten noch zugeteilten Zinssatz.',ok:1,why:'Holländisch heißt: ein einheitlicher Satz für alle, und zwar der niedrigste, der noch zum Zug kommt.'},
+ {t:'Beim amerikanischen Zinstender zahlt jede Bank den Zinssatz, den sie selbst geboten hat.',ok:1,why:'Amerikanisch heißt: jeder zahlt sein eigenes Gebot.'},
+ {t:'Das Mindestreserve-Soll muss im Durchschnitt der Erfüllungsperiode erfüllt sein.',ok:1,why:'Es zählt der Durchschnitt, nicht jeder einzelne Tag. An einzelnen Tagen darf das Guthaben darunter liegen.'},
+ {t:'Das Eurosystem besteht aus der EZB und den nationalen Zentralbanken der Euro-Länder.',ok:1,why:'Eurosystem = EZB plus Notenbanken der Länder mit Euro. Das ESZB umfasst zusätzlich alle anderen EU-Notenbanken.'},
+ {t:'Vorrangiges Ziel der EZB ist die Vollbeschäftigung im Euroraum.',ok:0,why:'Falsch. Vorrangiges Ziel ist die Preisstabilität. Beschäftigung ist kein Hauptziel der EZB.'},
+ {t:'Die EZB strebt eine Inflationsrate von 0 % an.',ok:0,why:'Falsch. Das Ziel sind 2 %. Bei 0 % droht leicht eine Deflation.'},
+ {t:'Der Zinssatz der Einlagefazilität bildet die Obergrenze für den Tagesgeldzins.',ok:0,why:'Falsch. Die Einlagefazilität ist die Untergrenze. Die Obergrenze ist die Spitzenrefinanzierung.'},
+ {t:'Beim holländischen Zinstender zahlt jede Bank ihren eigenen gebotenen Zinssatz.',ok:0,why:'Falsch. Das ist das amerikanische Verfahren. Holländisch heißt: einheitlicher Satz für alle.'},
+ {t:'Das Mindestreserve-Soll muss an jedem einzelnen Tag der Erfüllungsperiode erreicht werden.',ok:0,why:'Falsch. Es zählt der Durchschnitt über die ganze Periode.'},
+ {t:'Das ESZB besteht nur aus den Zentralbanken der Euro-Länder.',ok:0,why:'Falsch. Zum ESZB gehören die EZB und die Notenbanken aller EU-Staaten, auch ohne Euro.'},
+ {t:'Erhöht die EZB die Leitzinsen, steigt in der Regel die Geldmenge.',ok:0,why:'Falsch. Höhere Zinsen machen Kredite teurer, es wird weniger geliehen, die Geldmenge sinkt.'}
+];
+const G={ezb:[],el:[],kon:[],recht:[],zahl:[]};
+G.ezb.push(function massnahme(){
+  if(Math.random()<.6){const r=fmt(rnd(45,95)/10,1);
+    return mc(`Die Inflationsrate im Euroraum ist auf <b>${r} %</b> gestiegen.`,pick(RESTR),EXPAN,
+     `Inflation zu hoch heißt: Geld muss knapper und teurer werden. Die EZB handelt <b>restriktiv</b>: Leitzinsen hoch, Wertpapiere verkaufen, Mindestreserve hoch. Dann sinkt die Geldmenge und die Preise steigen langsamer.`,'Welche Maßnahme der EZB ist geeignet, die Inflation zu senken?');}
+  const r=fmt(rnd(-6,6)/10,1);
+  return mc(`Die Inflationsrate im Euroraum liegt bei <b>${r} %</b>, die Wirtschaft schrumpft, es droht eine Deflation.`,pick(EXPAN),RESTR.concat(['Die EZB erhöht den Zinssatz der Einlagefazilität.']),
+   `Zu wenig Inflation und schwache Wirtschaft heißt: Geld muss billiger werden. Die EZB handelt <b>expansiv</b>: Leitzinsen runter, Wertpapiere kaufen, Mindestreserve runter. Dann steigt die Geldmenge.`,'Welche Maßnahme der EZB ist in dieser Lage geeignet?');
+});
+G.ezb.push(function tender(){
+  const step=pick([0.01,0.02]), base=rnd(200,420)/100;
+  const lv=[0,1,2,3,4].map(i=>+(base+(4-i)*step).toFixed(2));
+  const am=lv.map(()=>rnd(2,9)*100); const cum=[]; am.reduce((s,a,i)=>(cum[i]=s+a),0);
+  const k=rnd(1,3); const zut=cum[k-1]+pick([...Array(am[k]/50).keys()].map(x=>(x+1)*50));
+  const tab=`<div class="tbl"><table><tr><th>Zinssatz</th><th>Gebote</th><th>Summe von oben</th></tr>${lv.map((l,i)=>`<tr><td>${fmt(l,2)} %</td><td>${fmt(am[i])} Mio. €</td><td style="color:var(--muted)">?</td></tr>`).join('')}</table></div>`;
+  const loes=`<div class="tbl"><table><tr><th>Zinssatz</th><th>Summe von oben</th></tr>${lv.map((l,i)=>`<tr${i===k?' style="font-weight:800;color:var(--ok)"':''}><td>${fmt(l,2)} %</td><td>${fmt(cum[i])} Mio. €</td></tr>`).join('')}</table></div>`;
+  if(Math.random()<.7) return num(`Die EZB führt ein Hauptrefinanzierungsgeschäft als <b>Zinstender nach dem holländischen Verfahren</b> durch. Sie will <b>${fmt(zut)} Mio. €</b> zuteilen. Es gehen folgende Gebote ein:${tab}`,lv[k],0.001,'%',
+    `Von oben nach unten die Gebote addieren, bis die ${fmt(zut)} Mio. € erreicht sind:${loes}Bei <b>${fmt(lv[k],2)} %</b> reicht die Summe. Holländisch heißt: <b>alle</b> zahlen diesen niedrigsten noch zugeteilten Satz. Gebote darunter gehen leer aus.`,'Zu welchem Zinssatz (in %, 2 Nachkommastellen) erhalten die Kreditinstitute die Liquidität?');
+  return num(`Die EZB führt ein Hauptrefinanzierungsgeschäft als <b>Zinstender nach dem amerikanischen Verfahren</b> durch. Sie will <b>${fmt(zut)} Mio. €</b> zuteilen. Es gehen folgende Gebote ein:${tab}`,lv[0],0.001,'%',
+    `Amerikanisch heißt: jede Bank zahlt <b>ihr eigenes Gebot</b>. Die Bank mit ${fmt(lv[0],2)} % ist ganz oben, sie wird voll bedient und zahlt <b>${fmt(lv[0],2)} %</b>. Beim holländischen Verfahren wären es für alle ${fmt(lv[k],2)} % gewesen.`,`Welchen Zinssatz (in %) zahlt das Kreditinstitut, das zu ${fmt(lv[0],2)} % geboten hat?`);
+});
+G.ezb.push(function mindestreserve(){
+  let S,N,vals,need;
+  do{S=rnd(40,90);N=pick([5,6,7]);vals=Array.from({length:N-1},()=>S+rnd(-25,20));need=S*N-vals.reduce((a,b)=>a+b,0);}while(need<5||need>S+60);
+  const tab=`<div class="tbl"><table><tr>${vals.map((v,i)=>`<th>Tag ${i+1}</th>`).join('')}<th>Tag ${N}</th></tr><tr>${vals.map(v=>`<td>${v}</td>`).join('')}<td>?</td></tr></table></div>`;
+  return num(`Das Mindestreserve-Soll der Rheinbank AG beträgt <b>${S} Mio. €</b>. Die Erfüllungsperiode umfasst vereinfacht <b>${N} Tage</b>. Das Guthaben bei der Bundesbank betrug bisher (in Mio. €):${tab}`,need,0.001,'Mio. €',
+   `Es zählt der <b>Durchschnitt</b>. Insgesamt nötig: ${S} × ${N} = <b>${S*N}</b>. Schon da: ${vals.join(' + ')} = <b>${S*N-need}</b>. Fehlt am letzten Tag: ${S*N} − ${S*N-need} = <b>${need} Mio. €</b>.`,'Wie hoch muss das Guthaben am letzten Tag mindestens sein (in Mio. €)?');
+});
+G.ezb.push(function aussagen(){
+  const falsch=Math.random()<.35; const T=EZB_SAETZE.filter(s=>s.ok), F=EZB_SAETZE.filter(s=>!s.ok);
+  const c=falsch?pick(F):pick(T), w=falsch?T:F;
+  return mc('Sie bereiten sich mit einer Kollegin auf ein Kundengespräch zur Geldpolitik vor.',c,w,c.why,falsch?'Welche Aussage ist <u>falsch</u>?':'Welche Aussage trifft zu?');
+});
+G.ezb.push(function reihenfolge(){
+  const items=['Die EZB kündigt das Tenderverfahren an.','Die Kreditinstitute geben ihre Gebote ab.','Die EZB teilt die Liquidität zu und gibt das Ergebnis bekannt.','Das Geschäft wird abgewickelt, die Banken erhalten die Gutschrift.'];
+  return {typ:'order',text:'Bringen Sie die Schritte eines Tenderverfahrens der EZB in die richtige Reihenfolge.',ask:'Tippen Sie die Schritte in der richtigen Reihenfolge an.',items,why:'Merksatz: <b>Ankündigen, Bieten, Zuteilen, Abwickeln.</b> Erst sagt die EZB, dass es Geld gibt. Dann bieten die Banken. Dann entscheidet die EZB, wer was bekommt. Zum Schluss fließt das Geld.'};
+});
+
+/* ---------- Generatoren: Markt ---------- */
+G.el.push(function rechnen(){
+  let pp,E,qq,p1,p2;
+  do{pp=pick([-25,-20,-10,-5,5,10,20,25]);E=pick([0.2,0.4,0.5,0.6,0.8,1.2,1.5,2,2.5,3]);qq=-E*pp;p1=pick([2,2.5,4,5,8,10,12,15,20,25,40,60]);p2=p1*(1+pp/100);}
+  while(Math.abs(qq-Math.round(qq))>1e-9||Math.abs(p2*100-Math.round(p2*100))>1e-6);
+  qq=Math.round(qq);const q1=rnd(4,40)*100,q2=q1*(1+qq/100);
+  const ware=pick(['Sportgetränk','Smartphone-Hülle','Kinokarte','Fahrradhelm','Müslipackung','Konzertticket']);
+  return num(`Ein Händler ändert den Preis für ein ${ware} von <b>${fmt(p1,2)} €</b> auf <b>${fmt(p2,2)} €</b>. Die abgesetzte Menge verändert sich daraufhin von <b>${fmt(q1)}</b> auf <b>${fmt(q2)} Stück</b>.`,E,0.011,'',
+   `1. Preisänderung in %: (${fmt(p2,2)} − ${fmt(p1,2)}) : ${fmt(p1,2)} × 100 = <b>${pp>0?'+':''}${pp} %</b><br>2. Mengenänderung in %: (${fmt(q2)} − ${fmt(q1)}) : ${fmt(q1)} × 100 = <b>${qq>0?'+':''}${qq} %</b><br>3. Elastizität = ${qq} : ${pp} = <b>${fmt(-E,2)}</b>, als Betrag <b>${fmt(E,2)}</b>.<br>${E>1?'Über 1 heißt <b>elastisch</b>: die Kunden reagieren stark auf den Preis.':'Unter 1 heißt <b>unelastisch</b>: die Kunden reagieren kaum auf den Preis.'}`,'Berechnen Sie die direkte Preiselastizität der Nachfrage (Betrag, 2 Nachkommastellen).');
+});
+G.el.push(function umsatz(){
+  const E=pick([0.3,0.5,0.7,1.4,1.8,2.5]),hoch=Math.random()<.5,el=E>1;
+  const steigt=(el&&!hoch)||(!el&&hoch);
+  return mc(`Die Preiselastizität der Nachfrage nach einem Produkt beträgt <b>${fmt(-E,1)}</b>. Der Anbieter ${hoch?'<b>erhöht</b>':'<b>senkt</b>'} den Preis um 10 %.`,
+   steigt?'Der Umsatz steigt.':'Der Umsatz sinkt.',[steigt?'Der Umsatz sinkt.':'Der Umsatz steigt.','Der Umsatz bleibt unverändert.','Die Absatzmenge bleibt unverändert.','Ohne Angabe der Kosten ist keine Aussage möglich.'],
+   `Betrag ${fmt(E,1)} ist ${el?'<b>über 1, also elastisch</b>. Die Menge reagiert stärker als der Preis.':'<b>unter 1, also unelastisch</b>. Die Menge reagiert schwächer als der Preis.'} ${hoch?'Preis rauf':'Preis runter'}, ${el?(hoch?'die Menge fällt stark':'die Menge steigt stark'):(hoch?'die Menge fällt nur wenig':'die Menge steigt nur wenig')}. Darum <b>${steigt?'steigt':'sinkt'}</b> der Umsatz.`,'Welche Folge ergibt sich für den Umsatz?');
+});
+G.el.push(function vollkommen(){
+  const UNV=[{t:'Viele Kunden kaufen aus Gewohnheit immer in derselben Bäckerei.',why:'Gewohnheit ist eine <b>persönliche Vorliebe</b>. Auf einem vollkommenen Markt gibt es keine Vorlieben.'},{t:'Ein Geschäft liegt näher an der Wohnung der Kunden als die anderen.',why:'Das ist eine <b>räumliche Vorliebe</b>. Also ist der Markt unvollkommen.'},{t:'Die Kunden haben keinen vollständigen Überblick über die Preise aller Anbieter.',why:'Es fehlt die <b>Markttransparenz</b>. Also ist der Markt unvollkommen.'},{t:'Die angebotenen Smartphones unterscheiden sich in Marke, Design und Qualität.',why:'Die Güter sind <b>nicht gleichartig</b>. Also ist der Markt unvollkommen.'},{t:'Ein Kunde kauft nur bei einem Berater, den er persönlich gut kennt.',why:'Das ist eine <b>persönliche Vorliebe</b>. Also ist der Markt unvollkommen.'}];
+  const VOLL=['Alle Anbieter verkaufen völlig gleichartige Güter.','Alle Marktteilnehmer haben einen vollständigen Überblick über Angebot und Preise.','Es gibt keine persönlichen, räumlichen oder zeitlichen Vorlieben.','Alle Marktteilnehmer reagieren sofort auf Preisänderungen.'];
+  if(Math.random()<.6){const c=pick(UNV);return mc('Sie prüfen verschiedene Märkte in Ihrer Region.',c,VOLL,c.why+' Merkmale des vollkommenen Marktes: gleiche Güter, volle Übersicht, keine Vorlieben, sofortige Reaktion.','Welche Situation ist ein Merkmal eines <u>unvollkommenen</u> Marktes?');}
+  const c=pick(VOLL);return mc('Sie erklären einem neuen Azubi den Begriff „vollkommener Markt“.',c,UNV.map(u=>u.t),'Vollkommener Markt heißt: <b>gleiche Güter, volle Übersicht, keine Vorlieben, sofortige Reaktion.</b> Alle anderen Antworten beschreiben einen unvollkommenen Markt.','Welches Merkmal gehört zum vollkommenen Markt?');
+});
+G.el.push(function kurven(){
+  const O=['Der Preis steigt, die Menge sinkt.','Der Preis steigt, die Menge steigt.','Der Preis sinkt, die Menge steigt.','Der Preis sinkt, die Menge sinkt.','Preis und Menge bleiben unverändert.'];
+  const S=[{t:'Die Rohstoffpreise für die Herstellung von Fahrrädern steigen stark.',o:0,why:'Höhere Kosten: die Anbieter bieten weniger an. Die <b>Angebotskurve geht nach links</b>. Preis rauf, Menge runter.'},
+   {t:'Eine Missernte verringert das Angebot an Äpfeln deutlich.',o:0,why:'Weniger Angebot: die <b>Angebotskurve geht nach links</b>. Preis rauf, Menge runter.'},
+   {t:'Ein Influencer macht ein Getränk zum Trend, viel mehr Menschen wollen es kaufen.',o:1,why:'Mehr Nachfrage: die <b>Nachfragekurve geht nach rechts</b>. Preis und Menge steigen.'},
+   {t:'Die Einkommen der Haushalte steigen deutlich.',o:1,why:'Mehr Geld, mehr Nachfrage: die <b>Nachfragekurve geht nach rechts</b>. Preis und Menge steigen.'},
+   {t:'Neue Anbieter drängen mit günstiger Technik auf den Markt für E-Scooter.',o:2,why:'Mehr Angebot: die <b>Angebotskurve geht nach rechts</b>. Preis runter, Menge rauf.'},
+   {t:'Nach schlechten Testberichten wollen deutlich weniger Kunden ein Produkt kaufen.',o:3,why:'Weniger Nachfrage: die <b>Nachfragekurve geht nach links</b>. Preis und Menge sinken.'}];
+  const s=pick(S);return mc(s.t,O[s.o],O.filter((_,i)=>i!==s.o),s.why+' Merksatz: Angebot nach links heißt teurer und weniger. Nachfrage nach rechts heißt teurer und mehr.','Wie verändern sich Gleichgewichtspreis und Gleichgewichtsmenge, wenn sonst alles gleich bleibt?');
+});
+G.el.push(function staatspreis(){
+  const S=[{t:'Der Staat legt für Mietwohnungen einen <b>Höchstpreis unter dem Gleichgewichtspreis</b> fest.',c:'Es entsteht ein Nachfrageüberhang, Wohnungen werden knapp.',w:['Es entsteht ein Angebotsüberhang, viele Wohnungen stehen leer.','Der Markt bleibt im Gleichgewicht.','Die Zahl der angebotenen Wohnungen steigt.'],why:'Der Preis ist künstlich niedrig. Viele wollen mieten, wenige wollen vermieten. Es gibt <b>zu wenig Angebot</b>, also einen Nachfrageüberhang.'},
+   {t:'Der Staat legt für Milch einen <b>Mindestpreis über dem Gleichgewichtspreis</b> fest.',c:'Es entsteht ein Angebotsüberhang.',w:['Es entsteht ein Nachfrageüberhang.','Der Markt bleibt im Gleichgewicht.','Die Nachfrage nach Milch steigt.'],why:'Der Preis ist künstlich hoch. Bauern wollen viel verkaufen, Kunden kaufen weniger. Es bleibt <b>zu viel Ware übrig</b>, also ein Angebotsüberhang.'},
+   {t:'Der Staat erhöht den gesetzlichen <b>Mindestlohn über den Gleichgewichtslohn</b>.',c:'Es kann Arbeitslosigkeit entstehen, weil das Angebot an Arbeit größer ist als die Nachfrage.',w:['Die Unternehmen fragen mehr Arbeitskräfte nach.','Es entsteht ein Mangel an Arbeitskräften.','Der Arbeitsmarkt bleibt im Gleichgewicht.'],why:'Beim Lohn sind die Arbeitnehmer die Anbieter. Hoher Lohn: viele wollen arbeiten, Firmen stellen weniger ein. Ein <b>Angebotsüberhang an Arbeit</b> heißt Arbeitslosigkeit.'},
+   {t:'Auf einem Markt ist das Angebot dauerhaft größer als die Nachfrage.',c:'Es liegt ein Käufermarkt vor, die Käufer haben eine starke Stellung.',w:['Es liegt ein Verkäufermarkt vor.','Die Preise steigen.','Die Anbieter haben eine starke Stellung.'],why:'Mehr Ware als Käufer: die Käufer können wählen und verhandeln. Das heißt <b>Käufermarkt</b>.'}];
+  const s=pick(S);return mc(s.t,s.c,s.w,s.why,'Welche Folge ist zu erwarten?');
+});
+
+/* ---------- Generatoren: Konjunktur ---------- */
+const PH={Aufschwung:['Die Auftragseingänge steigen.','Die Auslastung der Maschinen nimmt zu.','Die Arbeitslosigkeit beginnt zu sinken.','Die Stimmung in den Unternehmen hellt sich auf.'],
+ 'Boom (Hochkonjunktur)':['Die Kapazitäten sind voll ausgelastet.','Preise und Löhne steigen stark.','Die Zinsen sind hoch.','Es herrscht Fachkräftemangel.'],
+ 'Abschwung (Rezession)':['Die Auftragseingänge gehen zurück.','Die Lagerbestände steigen.','Die Unternehmen investieren weniger.','Die Kurzarbeit nimmt zu.','Das reale BIP schrumpft.'],
+ 'Tiefstand (Depression)':['Die Arbeitslosigkeit ist sehr hoch.','Die Auslastung der Betriebe ist sehr niedrig.','Die Zinsen sind sehr niedrig.','Die Stimmung ist pessimistisch.']};
+G.kon.push(function phase(){
+  const p=pick(Object.keys(PH));const ind=sample(PH[p],3);
+  return mc(`Das Statistische Bundesamt meldet:<ul>${ind.map(i=>`<li>${i}</li>`).join('')}</ul>`,p,Object.keys(PH).filter(x=>x!==p),
+   `<b>${p}</b>. Merkhilfe: Aufschwung = es geht los. Boom = alles voll, alles teuer. Abschwung = Aufträge und Investitionen sinken, BIP schrumpft. Tiefstand = ganz unten, viele Arbeitslose.`,'In welcher Konjunkturphase befindet sich die Wirtschaft?');
+});
+G.kon.push(function massnahme(){
+  const EXP=['Der Staat erhöht seine Investitionen in Straßen und Schulen.','Der Staat senkt befristet die Einkommensteuer.','Der Staat verbessert die Abschreibungsmöglichkeiten für Unternehmen.','Der Staat zahlt eine Prämie beim Kauf neuer Elektroautos.'];
+  const RES=['Der Staat erhöht die Umsatzsteuer.','Der Staat kürzt seine Ausgaben und bildet Rücklagen.','Der Staat erhöht die Einkommensteuer.','Der Staat streicht Subventionen für Unternehmen.'];
+  if(Math.random()<.7) return mc('Die Wirtschaft befindet sich in einer <b>Rezession</b>. Die Nachfrage ist schwach, die Arbeitslosigkeit steigt.',pick(EXP),RES,'In der Rezession muss der Staat die <b>Nachfrage stützen</b>: mehr ausgeben, Steuern senken, Investitionen fördern. Das nennt man antizyklisch: gegen den Trend handeln.','Welche staatliche Maßnahme ist geeignet, die Nachfrage zu stützen?');
+  return mc('Die Wirtschaft ist im <b>Boom</b>. Die Kapazitäten sind ausgelastet, die Preise steigen stark.',pick(RES),EXP,'Im Boom muss der Staat <b>bremsen</b>: weniger ausgeben, Rücklagen bilden, Steuern erhöhen. Antizyklisch heißt: gegen den Trend.','Welche staatliche Maßnahme passt zu dieser Lage?');
+});
+G.kon.push(function indikator(){
+  const FR=['Auftragseingänge in der Industrie','ifo-Geschäftsklimaindex','Zahl der Baugenehmigungen','Stimmung der Verbraucher (Konsumklima)'];
+  const SP=['Arbeitslosenquote','Zahl der Unternehmensinsolvenzen','Entwicklung der Tariflöhne','Steuereinnahmen des Staates'];
+  if(Math.random()<.65) return mc('Ein Kunde fragt, woran man früh erkennt, wohin sich die Wirtschaft entwickelt.',pick(FR),SP,'<b>Frühindikatoren</b> zeigen die Zukunft: Aufträge, Stimmung, Baugenehmigungen. Die Arbeitslosigkeit reagiert erst spät, weil Firmen erst abwarten, bevor sie einstellen oder entlassen.','Welche Größe ist ein Frühindikator der Konjunktur?');
+  return mc('Ein Kunde fragt, welche Größe erst spät auf die Konjunktur reagiert.',pick(SP),FR,'<b>Spätindikatoren</b> wie die Arbeitslosigkeit reagieren erst, wenn die Entwicklung schon läuft. Frühindikatoren sind Aufträge, Stimmung und Baugenehmigungen.','Welche Größe ist ein Spätindikator?');
+});
+G.kon.push(function alq(){
+  const A=rnd(2200,3200)*1000,E=rnd(42000,46000)*1000,ep=Math.random()<.4;
+  const q=ep?A/(A+E)*100:A/(A+E)*100; const r=Math.round(q*100)/100;
+  const t=ep?`Im Inland gibt es <b>${fmt(A+E)} Erwerbspersonen</b>, davon sind <b>${fmt(A)} arbeitslos</b>.`:`Im Inland gibt es <b>${fmt(E)} Erwerbstätige</b> und <b>${fmt(A)} registrierte Arbeitslose</b>.`;
+  return num(t,r,0.011,'%',ep?`Erwerbspersonen sind schon Erwerbstätige + Arbeitslose. Also: ${fmt(A)} : ${fmt(A+E)} × 100 = <b>${fmt(r,2)} %</b>.`:`Achtung, Falle: Geteilt wird durch <b>alle Erwerbspersonen</b> = Erwerbstätige + Arbeitslose = ${fmt(A+E)}. Also: ${fmt(A)} : ${fmt(A+E)} × 100 = <b>${fmt(r,2)} %</b>.`,'Berechnen Sie die Arbeitslosenquote (in %, 2 Nachkommastellen).');
+});
+G.kon.push(function bipreal(){
+  const nom=rnd(38000,46000)/10, idx=rnd(1030,1250)/10, real=Math.round(nom/idx*1000)/10;
+  return num(`Das nominale Bruttoinlandsprodukt beträgt <b>${fmt(nom,1)} Mrd. €</b>. Der Preisindex liegt bei <b>${fmt(idx,1)}</b> (Basisjahr = 100).`,real,0.15,'Mrd. €',`Real heißt: die Preissteigerung herausrechnen. ${fmt(nom,1)} : ${fmt(idx,1)} × 100 = <b>${fmt(real,1)} Mrd. €</b>.`,'Berechnen Sie das reale BIP (in Mrd. €, 1 Nachkommastelle).');
+});
+G.kon.push(function politik(){
+  const N=['Der Staat zahlt allen Haushalten einen einmaligen Konsumbonus.','Der Staat erhöht seine Ausgaben für öffentliche Bauaufträge.','Der Staat senkt befristet die Umsatzsteuer.'];
+  const A=['Der Staat senkt die Unternehmensteuern dauerhaft.','Der Staat baut Vorschriften für Unternehmen ab.','Der Staat senkt die Lohnnebenkosten der Arbeitgeber.'];
+  const isN=Math.random()<.5,c=isN?pick(N):pick(A);
+  return mc(`Die Bundesregierung plant folgende Maßnahme: <b>${c}</b>`,isN?'Nachfrageorientierte Wirtschaftspolitik':'Angebotsorientierte Wirtschaftspolitik',[isN?'Angebotsorientierte Wirtschaftspolitik':'Nachfrageorientierte Wirtschaftspolitik','Geldpolitik der EZB','Tarifpolitik der Sozialpartner'],
+   isN?'Der Staat gibt Geld aus oder macht Kaufen billiger, damit <b>mehr gekauft wird</b>. Das ist nachfrageorientiert und wirkt eher kurzfristig.':'Der Staat macht es den <b>Unternehmen leichter</b>: weniger Kosten, weniger Vorschriften. Das ist angebotsorientiert und wirkt eher langfristig.','Welcher Art von Wirtschaftspolitik ist die Maßnahme zuzuordnen?');
+});
+G.kon.push(function ust(){
+  return mc('Die Bundesregierung senkt die Umsatzsteuer <b>befristet für sechs Monate</b> von 19 % auf 16 %.','Die Verbraucher ziehen größere Anschaffungen in die sechs Monate vor.',['Die Verbraucher verschieben größere Anschaffungen auf die Zeit nach der Senkung.','Die Sparquote steigt deutlich an.','Die Nachfrage bleibt unverändert, weil die Senkung nur befristet ist.','Die Unternehmen erhöhen sofort ihre Nettopreise um 3 %.'],
+   'Wer weiß, dass es nur kurz billiger ist, <b>kauft jetzt</b>. Das nennt man Vorzieheffekt. Nach dem Ende der Senkung bricht die Nachfrage dann oft ein.','Welches Verhalten der Verbraucher ist zu erwarten?');
+});
+
+/* ---------- Generatoren: Recht ---------- */
+G.recht.push(function geschaeftsfaehig(){
+  const n=pick(NAMEN),age=pick([5,6,8,10,12,14,15,16,17,17,19,22]);
+  const F=[{k:'bar',t:`kauft vom eigenen Taschengeld ein Buch für ${rnd(8,25)} € und bezahlt sofort bar.`},
+   {k:'raten',t:`kauft ohne Wissen der Eltern eine Spielkonsole für ${rnd(350,600)} € auf Raten.`},
+   {k:'geschenk',t:`bekommt von der Tante eine Uhr geschenkt und nimmt das Geschenk an.`},
+   {k:'einw',t:`kauft mit vorheriger Zustimmung der Eltern ein E-Bike für ${fmt(rnd(18,32)*100)} €.`},
+   {k:'ohne',t:`bestellt ohne Wissen der Eltern ein Smartphone für ${rnd(700,1200)} € auf Rechnung.`}];
+  const f=pick(F);let c,why;
+  if(age<7){c='Der Vertrag ist von Anfang an nichtig.';why=`${n} ist ${age} Jahre alt, also <b>unter 7 und geschäftsunfähig</b>. Alles, was ${n} erklärt, ist nichtig, auch bei Geschenken und Taschengeld.`}
+  else if(age>=18){c='Der Vertrag ist voll wirksam.';why=`${n} ist ${age}, also <b>volljährig und voll geschäftsfähig</b>. Der Vertrag gilt.`}
+  else if(f.k==='bar'){c='Der Vertrag ist voll wirksam.';why=`${n} ist ${age}, also beschränkt geschäftsfähig. Aber: <b>Taschengeldparagraph</b>. Mit eigenem Taschengeld sofort bezahlt heißt wirksam.`}
+  else if(f.k==='geschenk'){c='Der Vertrag ist voll wirksam.';why=`${n} ist ${age}, also beschränkt geschäftsfähig. Ein Geschenk bringt <b>nur einen rechtlichen Vorteil</b>. Dafür braucht es keine Zustimmung, es ist wirksam.`}
+  else if(f.k==='einw'){c='Der Vertrag ist voll wirksam.';why=`${n} ist ${age}, also beschränkt geschäftsfähig. Die Eltern haben <b>vorher zugestimmt</b> (Einwilligung). Damit ist der Vertrag wirksam.`}
+  else {c='Der Vertrag ist schwebend unwirksam, bis die Eltern ihn genehmigen.';why=`${n} ist ${age}, also <b>beschränkt geschäftsfähig</b> (7 bis 17). Ohne Zustimmung, nicht bar mit Taschengeld: der Vertrag <b>schwebt</b>. Genehmigen die Eltern, gilt er. Lehnen sie ab, ist er unwirksam. Ratenkäufe fallen nie unter den Taschengeldparagraphen.`}
+  const all=['Der Vertrag ist voll wirksam.','Der Vertrag ist schwebend unwirksam, bis die Eltern ihn genehmigen.','Der Vertrag ist von Anfang an nichtig.','Der Vertrag ist wegen Irrtums anfechtbar.','Der Vertrag ist wirksam, kann aber innerhalb von 14 Tagen widerrufen werden.'];
+  return mc(`<b>${n} (${age} Jahre)</b> ${f.t}`,c,all.filter(a=>a!==c),why,'Wie ist das Rechtsgeschäft rechtlich zu beurteilen?');
+});
+G.recht.push(function besitz(){
+  const k=pick(NAMEN),v=pick(['Radhaus Meier','Elektro Weber GmbH','Möbel Krämer KG','Juwelier Stein']);
+  const O=[`${k} ist Besitzer und Eigentümer.`,`${k} ist Besitzer, ${v} ist Eigentümer.`,`${v} ist Besitzer, ${k} ist Eigentümer.`,`${v} ist Besitzer und Eigentümer.`];
+  const S=[{t:`${k} kauft bei ${v} eine Ware auf Raten unter <b>Eigentumsvorbehalt</b> und nimmt sie mit. Zwei Raten sind noch offen.`,o:1,why:`${k} hat die Ware in der Hand, ist also <b>Besitzer</b>. Wegen des Eigentumsvorbehalts bleibt ${v} <b>Eigentümer</b>, bis alles bezahlt ist.`},
+   {t:`${k} kauft bei ${v} eine Ware, <b>bezahlt sofort</b>, will sie aber erst nächste Woche <b>abholen</b>.`,o:3,why:`Eigentum geht erst über durch <b>Einigung und Übergabe</b>. Die Ware ist noch im Laden, also ist ${v} noch <b>Besitzer und Eigentümer</b>. Bezahlen allein reicht nicht.`},
+   {t:`${k} kauft bei ${v} eine Ware, bezahlt sofort und <b>nimmt sie gleich mit</b>.`,o:0,why:`Einigung und Übergabe sind erfolgt. ${k} hat die Ware in der Hand und sie gehört ${k}: <b>Besitzer und Eigentümer</b>.`},
+   {t:`${k} hat bei ${v} eine Ware gekauft und vollständig bezahlt. ${k} bringt sie zur <b>Reparatur</b> zurück, sie steht jetzt in der Werkstatt von ${v}.`,o:2,why:`Die Ware gehört ${k}, also ist ${k} <b>Eigentümer</b>. In der Hand hat sie gerade ${v}, also ist ${v} <b>Besitzer</b>.`}];
+  const s=pick(S);return mc(s.t,O[s.o],O.filter((_,i)=>i!==s.o),s.why+' Merksatz: <b>Besitz = in der Hand. Eigentum = gehört mir.</b>','Welche Aussage zu Besitz und Eigentum trifft zu?');
+});
+G.recht.push(function wirkung(){
+  const O=['Das Rechtsgeschäft ist von Anfang an nichtig.','Das Rechtsgeschäft ist anfechtbar.','Das Rechtsgeschäft ist gültig.','Das Rechtsgeschäft ist schwebend unwirksam.'];
+  const S=[{t:'Ein Grundstück wird <b>mündlich</b> verkauft, ein Notar ist nicht beteiligt.',o:0,why:'Grundstückskäufe brauchen den <b>Notar</b>. Fehlt die Form, ist der Vertrag nichtig (Formmangel).'},
+   {t:'Zwei Freunde „verkaufen“ sich <b>zum Spaß</b> ein Auto für 1 €. Beide wissen, dass es nicht ernst gemeint ist.',o:0,why:'Ein <b>Scherzgeschäft</b> ist nichtig. Keiner wollte wirklich einen Vertrag.'},
+   {t:'Ein Händler nutzt die <b>Notlage</b> eines Kunden aus und verlangt das Zehnfache des üblichen Preises.',o:0,why:'Das ist <b>Wucher</b>, also sittenwidrig. Der Vertrag ist nichtig.'},
+   {t:'Um Steuern zu sparen, schreiben Käufer und Verkäufer einen <b>niedrigeren Preis</b> in den Vertrag, als sie wirklich vereinbart haben.',o:0,why:'Das ist ein <b>Scheingeschäft</b>. Der geschriebene Vertrag ist nichtig.'},
+   {t:'Ein Verkäufer <b>verschreibt sich</b> im Angebot und schreibt 150 € statt 510 €.',o:1,why:'Das ist ein <b>Erklärungsirrtum</b>. Er wollte etwas anderes schreiben. Der Vertrag ist anfechtbar.'},
+   {t:'Ein Gebrauchtwagenhändler <b>verschweigt bewusst</b> einen schweren Unfallschaden.',o:1,why:'Das ist <b>arglistige Täuschung</b>. Der Käufer kann anfechten.'},
+   {t:'Ein Kunde unterschreibt einen Vertrag nur, weil ihm mit <b>Gewalt gedroht</b> wird.',o:1,why:'Bei <b>Drohung</b> ist der Vertrag anfechtbar.'},
+   {t:'Ein Anleger kauft eine Aktie, weil er auf steigende Kurse hofft. Am nächsten Tag <b>fällt der Kurs</b> stark.',o:2,why:'Das ist ein <b>Motivirrtum</b>: er hat sich nur in seiner Erwartung geirrt. Das ist kein Anfechtungsgrund, der Kauf bleibt gültig.'},
+   {t:'Eine 30-jährige Kundin kauft im Supermarkt Lebensmittel und bezahlt an der Kasse.',o:2,why:'Volljährig, alles normal: der Vertrag ist <b>gültig</b>.'},
+   {t:'Ein 15-Jähriger kauft ohne Zustimmung der Eltern ein Mofa auf Raten.',o:3,why:'15 heißt <b>beschränkt geschäftsfähig</b>. Ohne Zustimmung und nicht mit Taschengeld bar: schwebend unwirksam.'}];
+  const s=pick(S);return mc(s.t,O[s.o],O.filter((_,i)=>i!==s.o),s.why+' Merksatz: <b>Nichtig</b> = Scherz, Schein, Form fehlt, Wucher, unter 7. <b>Anfechtbar</b> = Irrtum, Täuschung, Drohung.','Wie ist das Rechtsgeschäft zu beurteilen?');
+});
+G.recht.push(function antrag(){
+  const O=['Antrag','Annahme','Keine Willenserklärung, sondern eine Aufforderung zur Abgabe eines Antrags','Neuer Antrag (abgeänderte Annahme)'];
+  const S=[{t:'Im Schaufenster steht ein Fahrrad mit dem Preisschild 499 €.',o:2,why:'Schaufenster, Katalog, Werbung und Onlineshop sind <b>kein Antrag</b>. Der Händler lädt nur ein, ein Angebot zu machen.'},
+   {t:'Ein Möbelhaus verteilt Prospekte mit Sonderpreisen an alle Haushalte.',o:2,why:'Werbung richtet sich an alle und ist <b>kein Antrag</b>. Es ist eine Aufforderung zur Abgabe eines Antrags.'},
+   {t:'Ein Kunde bestellt per E-Mail 20 Ordner zum Katalogpreis.',o:0,why:'Die Bestellung auf einen Katalog ist der <b>Antrag</b>. Erst wenn der Händler zusagt oder liefert, ist der Vertrag geschlossen.'},
+   {t:'Ein Händler schreibt einer bestimmten Kundin ein verbindliches Angebot über 5 Drucker.',o:0,why:'Ein Angebot an eine <b>bestimmte Person</b> mit allen wichtigen Punkten ist ein <b>Antrag</b>.'},
+   {t:'Der Lieferant erhält eine Bestellung und liefert die Ware sofort aus.',o:1,why:'Die Lieferung auf eine Bestellung ist die <b>Annahme</b>. Damit ist der Kaufvertrag geschlossen.'},
+   {t:'Eine Kundin antwortet auf ein Angebot: „Einverstanden, aber nur mit 10 % Rabatt.“',o:3,why:'Eine Annahme <b>mit Änderung</b> gilt als Ablehnung und als <b>neuer Antrag</b>.'}];
+  const s=pick(S);return mc(s.t,O[s.o],O.filter((_,i)=>i!==s.o),s.why+' Merksatz: <b>Antrag + Annahme = Vertrag.</b>','Wie ist der Vorgang rechtlich einzuordnen?');
+});
+G.recht.push(function seitig(){
+  const EIN=[{t:'Kündigung eines Arbeitsvertrags',why:'Eine <b>Kündigung</b> braucht nur eine Willenserklärung: einseitig. Sie muss dem anderen zugehen, ist also empfangsbedürftig.'},{t:'Anfechtung eines Kaufvertrags',why:'Die <b>Anfechtung</b> erklärt nur einer: einseitig und empfangsbedürftig.'},{t:'Erteilung einer Vollmacht',why:'Eine <b>Vollmacht</b> erteilt einer allein: einseitig.'}];
+  const ZWEI=['Kaufvertrag','Mietvertrag','Schenkung','Darlehensvertrag','Bürgschaft','Arbeitsvertrag'];
+  if(Math.random()<.75){const c=pick(EIN);return mc('Sie ordnen Rechtsgeschäfte für eine Kundenmappe.',c,ZWEI,c.why+' Zweiseitig sind alle <b>Verträge</b>, auch Schenkung und Bürgschaft.','Welches Rechtsgeschäft ist ein <u>einseitiges</u> Rechtsgeschäft mit empfangsbedürftiger Willenserklärung?');}
+  const z=pick(ZWEI);return mc('Sie ordnen Rechtsgeschäfte für eine Kundenmappe.',z,['Kündigung eines Mietvertrags','Testament','Anfechtung eines Kaufvertrags','Erteilung einer Vollmacht'],`<b>${z}</b> ist ein Vertrag, also <b>zweiseitig</b>: es braucht zwei übereinstimmende Willenserklärungen. Kündigung, Testament, Anfechtung und Vollmacht sind einseitig. Das Testament ist sogar <b>nicht empfangsbedürftig</b>.`,'Welches Rechtsgeschäft ist ein <u>zweiseitiges</u> Rechtsgeschäft?');
+});
+
+/* ---------- Generatoren: Zahlen ---------- */
+G.zahl.push(function pause(){
+  const n=pick(NAMEN),age=rnd(15,17),s=pick([390,405,420,435,450,465,480,495,510]);
+  const c=s+270;const w=[s+300,s+240,s+360,s+330].map(fT);
+  return mc(`Azubi ${n} (${age} Jahre) beginnt ihre Arbeit um <b>${fT(s)}</b>.`,fT(c),w,`${n} ist unter 18, es gilt das <b>Jugendarbeitsschutzgesetz</b>: länger als <b>4,5 Stunden</b> am Stück darf nicht ohne Pause gearbeitet werden. ${fT(s)} + 4:30 = <b>${fT(c)}</b>.`,'Wann muss spätestens die erste Ruhepause beginnen?');
+});
+G.zahl.push(function pausenlaenge(){
+  const age=rnd(15,17),h=pick([4,5,5.5,6.5,7,8]);const c=h<=4.5?'Keine Pause vorgeschrieben':h<=6?'30 Minuten':'60 Minuten';
+  return mc(`Ein ${age}-jähriger Auszubildender arbeitet an einem Tag <b>${fmt(h,h%1?1:0)} Stunden</b>.`,c,['Keine Pause vorgeschrieben','15 Minuten','30 Minuten','45 Minuten','60 Minuten'].filter(x=>x!==c),'Jugendliche unter 18: <b>mehr als 4,5 bis 6 Stunden = 30 Minuten</b>, <b>mehr als 6 Stunden = 60 Minuten</b>. Bei höchstens 4,5 Stunden ist keine Pause vorgeschrieben. Jede Pause dauert mindestens 15 Minuten.','Wie lang müssen die Ruhepausen insgesamt mindestens sein?');
+});
+G.zahl.push(function naechster(){
+  const e=pick([1080,1095,1110,1125,1140,1155,1170,1185,1200]),c=e+720-1440;
+  return mc(`Ein 16-jähriger Auszubildender hilft bei einer Abendveranstaltung und hat um <b>${fT(e)}</b> Feierabend.`,fT(c),[fT(c-60),fT(c+60),fT(360),fT(c-30)].filter(x=>x!==fT(c)),`Jugendliche brauchen <b>12 Stunden Freizeit</b> zwischen zwei Arbeitstagen. ${fT(e)} + 12 Stunden = <b>${fT(c)}</b>. Außerdem gilt: nur zwischen 6 und 20 Uhr arbeiten.`,'Wann darf er am nächsten Tag frühestens wieder arbeiten?');
+});
+G.zahl.push(function urlaub(){
+  const age=pick([15,16,17,18]);const y=2027;const bm=rnd(2,12),bd=rnd(1,28);const by=y-age-1;
+  const geb=mkD(by,bm,bd);const c={15:30,16:27,17:25,18:24}[age];
+  return mc(`Ein Auszubildender ist am <b>${fD(geb)}</b> geboren. Er möchte seinen Urlaub für das Jahr <b>${y}</b> planen.`,c+' Werktage',['30 Werktage','27 Werktage','25 Werktage','24 Werktage','20 Werktage'].filter(x=>x!==c+' Werktage'),
+   `Es zählt das Alter <b>zu Beginn des Kalenderjahres</b>. Am 01.01.${y} ist er <b>${age}</b> Jahre alt (er wird erst im Lauf des Jahres ${age+1}). ${age<18?'Jugendarbeitsschutz: noch nicht 16 = 30, noch nicht 17 = 27, noch nicht 18 = 25 Werktage.':'Er ist volljährig, es gilt das Bundesurlaubsgesetz: <b>24 Werktage</b>.'}`,'Wie viele Werktage Urlaub stehen ihm gesetzlich mindestens zu?');
+});
+G.zahl.push(function mutterschutz(){
+  const y=2027,t=addD(mkD(y,3,1),rnd(0,250));
+  if(Math.random()<.45){const c=addD(t,-42);
+    return mc(`Der voraussichtliche Entbindungstermin von Frau Arslan ist der <b>${fD(t)}</b>.`,fD(c),[fD(addD(t,-41)),fD(addD(t,-56)),fD(addD(t,-35)),fD(addD(t,-43))],`Die Schutzfrist beginnt <b>6 Wochen vor</b> dem voraussichtlichen Termin: ${fD(t)} − 42 Tage = <b>${fD(c)}</b>. In dieser Zeit darf sie nur arbeiten, wenn sie es ausdrücklich will.`,'Wann beginnt die Mutterschutzfrist?');}
+  const zw=Math.random()<.3,d=zw?84:56,c=addD(t,d);
+  return mc(`Frau Becker hat am <b>${fD(t)}</b> ${zw?'<b>Zwillinge</b>':'ihr Kind'} zur Welt gebracht.`,fD(c),[fD(addD(t,zw?56:84)),fD(addD(t,42)),fD(addD(t,d+1)),fD(addD(t,d-1))],`Nach der Geburt gilt ein Beschäftigungsverbot von <b>${zw?'12 Wochen (Mehrlings- oder Frühgeburt)':'8 Wochen'}</b>: ${fD(t)} + ${d} Tage = <b>${fD(c)}</b>.`,'An welchem Tag endet die Schutzfrist nach der Entbindung?');
+});
+G.zahl.push(function wahl(){
+  const n=pick(NAMEN),age=pick([16,17,19,20,22,23,26,30]),azubi=age<25&&Math.random()<.6,mon=pick([3,4,8,14,30]);
+  const brW=age>=16,jW=age<18||azubi,brB=age>=18&&mon>=6,jB=age<25;
+  const desc=`<b>${n}</b> ist ${age} Jahre alt, ${azubi?'Auszubildende/r':'Angestellte/r (keine Ausbildung)'} und seit ${mon} Monaten im Betrieb.`;
+  const lab=(a,b)=>a&&b?'beide wählen':a?'nur den Betriebsrat wählen':b?'nur die JAV wählen':'keine der beiden wählen';
+  const opts=['beide wählen','nur den Betriebsrat wählen','nur die JAV wählen','keine der beiden wählen'];
+  if(Math.random()<.55){const c=lab(brW,jW);return mc(desc,`${n} darf ${c}.`,opts.filter(o=>o!==c).map(o=>`${n} darf ${o}.`),`<b>Betriebsrat wählen:</b> ab 16 (${brW?'ja':'nein'}). <b>JAV wählen:</b> alle unter 18 und alle Azubis (${jW?'ja':'nein'}).`,'Bei welchen Wahlen hat die Person das aktive Wahlrecht?');}
+  const L=(a,b)=>a&&b?'in beide Gremien gewählt werden':a?'nur in den Betriebsrat gewählt werden':b?'nur in die JAV gewählt werden':'in keines der beiden Gremien gewählt werden';
+  const c=L(brB,jB),all=['in beide Gremien gewählt werden','nur in den Betriebsrat gewählt werden','nur in die JAV gewählt werden','in keines der beiden Gremien gewählt werden'];
+  return mc(desc,`${n} kann ${c}.`,all.filter(o=>o!==c).map(o=>`${n} kann ${o}.`),`<b>In den Betriebsrat gewählt werden:</b> ab 18 und mindestens 6 Monate im Betrieb (${brB?'ja':'nein'}). <b>In die JAV gewählt werden:</b> unter 25 (${jB?'ja':'nein'}).`,'Für welche Gremien hat die Person das passive Wahlrecht (kann gewählt werden)?');
+});
+
+/* ---------- Erklärungen, einfach ---------- */
+const LERN={
+ezb:`<div class="card" style="--c:var(--t1)"><h3>Was macht die EZB?</h3><p>Die EZB ist die Bank der Banken im Euroraum. Ihr Job: <b>Die Preise sollen stabil bleiben</b>, Ziel ist eine Inflation von <b>2 %</b>.</p></div>
+<div class="card" style="--c:var(--t1)"><h3>Der eine Trick</h3><p>Stell dir Geld wie Wasser vor. <b>Zu viel Inflation:</b> die EZB dreht den Hahn zu. Sie macht Geld teurer (<b>Zinsen hoch</b>), holt Geld vom Markt (<b>Wertpapiere verkaufen</b>), sperrt mehr Geld ein (<b>Mindestreserve hoch</b>).</p><p><b>Zu wenig Inflation, Krise:</b> genau umgekehrt. Zinsen runter, Wertpapiere kaufen.</p></div>
+<div class="card" style="--c:var(--t1)"><h3>Tender: wie Banken Geld bekommen</h3><p>Die EZB versteigert Geld. Die Banken sagen, welchen Zins sie zahlen würden. Die höchsten Gebote kommen zuerst dran.</p><p><b>Holländisch:</b> alle zahlen den <b>niedrigsten Satz, der noch drankommt</b>. <b>Amerikanisch:</b> jeder zahlt <b>sein eigenes Gebot</b>.</p><p>Rechnen: von oben die Gebote addieren, bis die Menge erreicht ist. Diese Zeile ist der Satz.</p></div>
+<div class="card" style="--c:var(--t1)"><h3>Mindestreserve</h3><p>Banken müssen Geld bei der Notenbank parken. Es zählt der <b>Durchschnitt</b> über die Periode.</p></div>
+<div class="formel">letzter Tag = Soll × Tage − Summe der anderen Tage</div>`,
+el:`<div class="card" style="--c:var(--t2)"><h3>Preiselastizität: wie stark reagieren die Kunden?</h3><p>Der Preis ändert sich. Die Frage ist: wie stark ändert sich die gekaufte Menge?</p></div>
+<div class="formel">Elastizität = % Änderung Menge : % Änderung Preis</div>
+<div class="card" style="--c:var(--t2)"><h3>So rechnest du</h3><p>1. Preisänderung in %: (neu − alt) : alt × 100<br>2. Mengenänderung in %: (neu − alt) : alt × 100<br>3. Menge durch Preis teilen. Das Minus ignorierst du, es zählt der Betrag.</p></div>
+<div class="card" style="--c:var(--t2)"><h3>Was die Zahl bedeutet</h3><p><b>Über 1 = elastisch:</b> Kunden springen ab. Preis rauf heißt <b>Umsatz runter</b>.</p><p><b>Unter 1 = unelastisch:</b> Kunden brauchen es (Benzin, Brot). Preis rauf heißt <b>Umsatz rauf</b>.</p></div>
+<div class="card" style="--c:var(--t2)"><h3>Vollkommener Markt</h3><p>Gleiche Ware, alle haben Überblick, <b>keine Vorlieben</b> (nicht persönlich, nicht räumlich, nicht zeitlich), alle reagieren sofort. Fehlt eins, ist er unvollkommen.</p></div>
+<div class="card" style="--c:var(--t2)"><h3>Kurven verschieben</h3><p>Kosten steigen: Angebot nach links, <b>teurer und weniger</b>. Mehr Nachfrage: Nachfrage nach rechts, <b>teurer und mehr</b>.</p><p><b>Höchstpreis</b> zu niedrig: Mangel. <b>Mindestpreis</b> oder Mindestlohn zu hoch: Überschuss, beim Lohn Arbeitslosigkeit.</p></div>`,
+kon:`<div class="card" style="--c:var(--t3)"><h3>Konjunktur: die Wirtschaft fährt Achterbahn</h3><p><b>Aufschwung:</b> es geht los, Aufträge steigen.<br><b>Boom:</b> alles voll ausgelastet, alles wird teurer.<br><b>Abschwung (Rezession):</b> Aufträge sinken, BIP schrumpft, Kurzarbeit.<br><b>Tiefstand:</b> ganz unten, viele Arbeitslose.</p></div>
+<div class="card" style="--c:var(--t3)"><h3>Was der Staat tut</h3><p>Immer <b>gegen den Trend</b>. In der Rezession: mehr ausgeben, Steuern senken. Im Boom: sparen, bremsen.</p><p><b>Nachfrageorientiert:</b> Leute sollen mehr kaufen (Bonus, Steuer runter). <b>Angebotsorientiert:</b> Firmen sollen es leichter haben (weniger Kosten, weniger Vorschriften).</p></div>
+<div class="card" style="--c:var(--t3)"><h3>Früh oder spät?</h3><p><b>Frühindikator:</b> Aufträge, ifo-Index, Stimmung. <b>Spätindikator:</b> Arbeitslosigkeit.</p></div>
+<div class="formel">Arbeitslosenquote = Arbeitslose : (Erwerbstätige + Arbeitslose) × 100</div>
+<div class="formel">reales BIP = nominales BIP : Preisindex × 100</div>`,
+recht:`<div class="card" style="--c:var(--t4)"><h3>Wer darf Verträge schließen?</h3><p><b>Unter 7:</b> gar nichts, alles nichtig.<br><b>7 bis 17:</b> nur mit Ja der Eltern. Sonst <b>schwebend unwirksam</b>. Ausnahmen: <b>Taschengeld bar</b> und <b>Geschenke</b> gelten sofort. Raten nie.<br><b>Ab 18:</b> alles.</p></div>
+<div class="card" style="--c:var(--t4)"><h3>Besitz und Eigentum</h3><p><b>Besitz</b> = du hast es in der Hand. <b>Eigentum</b> = es gehört dir.</p><p>Eigentum wechselt erst mit <b>Einigung und Übergabe</b>. Bezahlt, aber noch im Laden: gehört noch dem Laden. Ratenkauf mit Eigentumsvorbehalt: du hast es, aber es gehört dem Verkäufer, bis alles bezahlt ist.</p></div>
+<div class="card" style="--c:var(--t4)"><h3>Nichtig oder anfechtbar?</h3><p><b>Nichtig</b> (gilt nie): Scherz, Schein, Notar fehlt, Wucher, unter 7.<br><b>Anfechtbar</b> (gilt, bis man anficht): Irrtum beim Erklären, arglistige Täuschung, Drohung.<br>Falle: <b>Motivirrtum</b> (Aktie fällt doch) ist kein Grund.</p></div>
+<div class="card" style="--c:var(--t4)"><h3>Wie entsteht ein Vertrag?</h3><p><b>Antrag + Annahme = Vertrag.</b> Schaufenster, Katalog, Werbung sind <b>kein Antrag</b>, nur eine Einladung. Annahme mit Änderung = neuer Antrag.</p><p><b>Einseitig</b> (einer reicht): Kündigung, Anfechtung, Vollmacht, Testament. <b>Zweiseitig:</b> alle Verträge, auch Schenkung.</p></div>`,
+zahl:`<div class="card" style="--c:var(--t5)"><h3>Jugendliche unter 18</h3><p>Höchstens <b>8 Stunden</b> am Tag, <b>40</b> in der Woche, 5 Tage. Nur zwischen <b>6 und 20 Uhr</b>. <b>12 Stunden</b> frei bis zum nächsten Tag.</p><p>Pause spätestens nach <b>4,5 Stunden</b>. Über 4,5 Stunden: <b>30 Minuten</b> Pause. Über 6 Stunden: <b>60 Minuten</b>.</p><p>Urlaub nach Alter am <b>1. Januar</b>: noch nicht 16 = 30, noch nicht 17 = 27, noch nicht 18 = 25 Werktage. Erwachsene 24.</p></div>
+<div class="card" style="--c:var(--t5)"><h3>Mutterschutz</h3><p><b>6 Wochen vor</b> dem Termin (= minus 42 Tage). <b>8 Wochen nach</b> der Geburt (= plus 56 Tage). Bei Zwillingen oder Frühgeburt <b>12 Wochen</b> (= plus 84 Tage).</p></div>
+<div class="card" style="--c:var(--t5)"><h3>Wahlen im Betrieb</h3><p><b>Betriebsrat:</b> wählen ab 16, gewählt werden ab 18 und nach 6 Monaten im Betrieb.</p><p><b>JAV:</b> wählen alle unter 18 und alle Azubis. Gewählt werden kann, wer unter 25 ist.</p></div>`
+};
+
+/* ---------- Speicher (nur Komfort) ---------- */
+const KEY='wiso-trainer-v1';
+let st={r:0,n:0,serie:0,best:0,top:{}};
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)st=Object.assign(st,s)}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+function topStat(k){return st.top[k]||(st.top[k]={r:0,n:0})}
+function hud(){$('#sPunkte').textContent=`${st.r} von ${st.n} richtig`;$('#sSerie').textContent=`Serie ${st.serie} · Rekord ${st.best}`}
+
+/* ---------- Ablauf ---------- */
+let sess=null,last={};
+function gen(k){const L=G[k];let f;do{f=pick(L)}while(L.length>1&&f===last[k]);last[k]=f;const q=f();q.topic=k;return q}
+function app(h){$('#app').innerHTML=h;window.scrollTo({top:0})}
+
+function start(){
+  sess=null;
+  app(`<div class="sheet"><h1>Abschlussprüfung WiSo</h1><p class="lead">Jede Runde neue Aufgaben im Stil der IHK, mit Erklärung nach jeder Antwort. Die fünf Themen kamen in fast jeder Prüfung der letzten Jahre.</p></div>
+  <div class="special">
+    <button class="primary" data-act="sim"><b>Prüfung simulieren</b><span>10 gemischte Aufgaben, am Ende Punkte und Note</span></button>
+    <button data-act="mix"><b>Endlos üben, gemischt</b><span>alle fünf Themen durcheinander</span></button>
+  </div>
+  <div class="grid">${Object.entries(TH).map(([k,t])=>{const s=topStat(k),p=s.n?Math.round(s.r/s.n*100):0;
+    return `<div class="tile" style="--c:${t.c}"><div class="top"><span class="nr">${t.nr}</span><h3>${t.name}</h3></div>
+    <div class="small">kam in ${t.freq} Prüfungen</div>
+    <div class="bar"><i style="width:${p}%"></i></div><div class="small">${s.n?`${s.r} von ${s.n} richtig (${p} %)`:'noch nicht geübt'}</div>
+    <div class="row"><button class="ghost" data-lern="${k}">Erklärung</button><button class="primary" data-ueb="${k}">Üben</button></div></div>`}).join('')}</div>`);
+}
+function lern(k){
+  const t=TH[k];
+  app(`<div class="sheet lern" style="--c:${t.c}"><div class="qhead"><span class="chip">${t.nr} · ${t.kurz}</span><span class="qnr">einfach erklärt</span></div><h1>${t.name}</h1>${LERN[k]}
+  <div class="actions"><button class="ghost" data-act="home">Zur Übersicht</button><button class="primary" data-ueb="${k}">Jetzt üben</button></div></div>`);
+}
+function ueben(mode,k){sess={mode,k,i:0,list:[],max:mode==='sim'?10:Infinity};next()}
+function next(){
+  let k=sess.k;
+  if(sess.mode!=='topic'){const keys=Object.keys(TH);k=keys[sess.i%keys.length];if(sess.mode==='mix')k=pick(keys);}
+  if(sess.mode==='sim'&&sess.i===0)sess.order=shuffle([...Object.keys(TH),...Object.keys(TH)]);
+  if(sess.mode==='sim')k=sess.order[sess.i];
+  const q=gen(k);sess.q=q;sess.pool=null;sess.done=false;sess.sel=null;sess.picked=[];render();
+}
+function render(){
+  const q=sess.q,t=TH[q.topic],nr=sess.mode==='sim'?`Aufgabe ${sess.i+1} von 10`:`Aufgabe ${sess.i+1}`;
+  const prog=sess.mode==='sim'?`<div class="progress">${Array.from({length:10},(_,i)=>`<i class="${i<sess.list.length?(sess.list[i]?'r':'f'):i===sess.i?'on':''}"></i>`).join('')}</div>`:'';
+  let body='';
+  if(q.typ==='mc')body=`<div class="opts" role="radiogroup">${q.opts.map((o,i)=>`<button class="opt" data-o="${i}" role="radio" aria-checked="false"><span class="box">${i+1}</span><span>${o.t}</span></button>`).join('')}</div>`;
+  if(q.typ==='num')body=`<div class="numin"><input id="numIn" inputmode="decimal" autocomplete="off" placeholder="Ergebnis" aria-label="Ergebnis eintragen"><span class="unit">${q.unit||''}</span></div>`;
+  if(q.typ==='order'){if(!sess.pool)sess.pool=shuffle(q.items);
+    body=`<div class="small" style="margin-top:12px">Deine Reihenfolge</div><div class="order-picked" id="picked">${sess.picked.map((s,i)=>`<div class="opt"><span class="box">${i+1}</span><span>${s}</span></div>`).join('')||'<div class="small">noch leer</div>'}</div>
+    <div class="small" style="margin-top:12px">Antippen</div><div class="order-pool">${sess.pool.filter(s=>!sess.picked.includes(s)).map(s=>`<button class="opt" data-p="${encodeURIComponent(s)}"><span class="box">+</span><span>${s}</span></button>`).join('')}</div>`;}
+  app(`<div class="sheet" style="--c:${t.c}">${prog}<div class="qhead" style="margin-top:${prog?'12px':'0'}"><span class="chip">${t.nr} · ${t.kurz}</span><span class="qnr">${nr} · 3,57 Punkte</span></div>
+   <div class="qtext">${q.text}${q.ask?`<div class="ask">${q.ask}</div>`:''}</div>${body}
+   <div id="fb"></div>
+   <div class="actions" id="act"><button class="ghost" data-act="home">Abbrechen</button>${q.typ==='order'?'<button class="ghost" data-act="reset">Zurücksetzen</button>':''}<button class="primary" data-act="check">Antwort prüfen</button></div></div>`);
+  if(q.typ==='num'){const i=$('#numIn');i.focus({preventScroll:true});i.addEventListener('keydown',e=>{if(e.key==='Enter')check()})}
+}
+function parseNum(s){s=String(s).trim().replace(/\s|%|€/g,'');if(s.includes(','))s=s.replace(/\./g,'').replace(',','.');return parseFloat(s)}
+function check(){
+  const q=sess.q;if(sess.done)return;let ok=false,info='';
+  if(q.typ==='mc'){if(sess.sel===null){flash('Bitte zuerst eine Antwort antippen.');return}ok=sess.sel===q.ok;
+    document.querySelectorAll('.opt').forEach((b,i)=>{b.disabled=true;if(i===q.ok)b.classList.add('right');else if(i===sess.sel)b.classList.add('wrong')});
+    const ch=q.opts[sess.sel];if(!ok&&ch.why)info=`<div class="why"><b>Deine Antwort:</b> ${ch.why}</div>`;
+    if(!ok)info=`<div class="why"><b>Richtig ist ${q.ok+1}:</b> ${q.opts[q.ok].t}</div>`+info;}
+  if(q.typ==='num'){const v=parseNum($('#numIn').value);if(isNaN(v)){flash('Bitte eine Zahl eintragen, zum Beispiel 1,25.');return}
+    ok=Math.abs(Math.abs(v)-Math.abs(q.answer))<=q.tol;$('#numIn').disabled=true;
+    info=`<div class="why"><b>Lösung:</b> ${fmt(q.answer,q.unit==='Mio. €'?0:q.unit==='Mrd. €'?1:2)} ${q.unit||''}</div>`;}
+  if(q.typ==='order'){if(sess.picked.length<q.items.length){flash('Bitte alle Schritte antippen.');return}ok=sess.picked.every((s,i)=>s===q.items[i]);
+    info=`<div class="why"><b>Richtige Reihenfolge:</b><br>${q.items.map((s,i)=>`${i+1}. ${s}`).join('<br>')}</div>`;}
+  sess.done=true;st.n++;const ts=topStat(q.topic);ts.n++;
+  if(ok){st.r++;ts.r++;st.serie++;st.best=Math.max(st.best,st.serie)}else st.serie=0;save();hud();
+  sess.list.push(ok);
+  $('#fb').innerHTML=`<div class="feedback ${ok?'ok':'bad'}" role="status"><div class="verdict">${ok?'Richtig':'Leider falsch'}</div>${info}<div class="why"><b>Erklärung:</b> ${q.why}</div></div>`;
+  const last=sess.mode==='sim'&&sess.i>=9;
+  $('#act').innerHTML=`<button class="ghost" data-act="home">Zur Übersicht</button><button class="primary" data-act="${last?'result':'next'}">${last?'Ergebnis ansehen':'Nächste Aufgabe'}</button>`;
+  $('#fb').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function flash(m){$('#fb').innerHTML=`<div class="feedback bad"><div class="why">${m}</div></div>`}
+function note(p){return p>=92?1:p>=81?2:p>=67?3:p>=50?4:p>=30?5:6}
+function result(){
+  const r=sess.list.filter(Boolean).length,p=r*10,n=note(p);
+  const txt={1:'Sehr gut. Genau so morgen.',2:'Gut. Das sitzt.',3:'Befriedigend. Schau dir die roten Themen noch einmal an.',4:'Bestanden. Ein paar Punkte mehr sind drin, übe die falschen Themen.',5:'Noch nicht ganz. Lies die Erklärungen und versuch es noch einmal.',6:'Fang mit den Erklärungen an und übe dann Thema für Thema.'}[n];
+  app(`<div class="sheet result"><div class="qnr">Prüfungssimulation</div><div class="note">${n}</div><h2>${p} von 100 Punkten</h2><p class="lead">${r} von 10 Aufgaben richtig. ${txt}</p>
+  <div class="progress" style="width:100%">${sess.list.map(x=>`<i class="${x?'r':'f'}"></i>`).join('')}</div>
+  <div class="actions" style="width:100%"><button class="ghost" data-act="home">Zur Übersicht</button><button class="primary" data-act="sim">Neue Simulation</button></div></div>`);
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.id==='home')return start();
+  if(b.dataset.lern)return lern(b.dataset.lern);
+  if(b.dataset.ueb)return ueben('topic',b.dataset.ueb);
+  if(b.dataset.o!==undefined&&!sess.done){sess.sel=+b.dataset.o;document.querySelectorAll('.opt').forEach((x,i)=>{x.classList.toggle('sel',i===sess.sel);x.setAttribute('aria-checked',i===sess.sel)});return}
+  if(b.dataset.p&&!sess.done){sess.picked.push(decodeURIComponent(b.dataset.p));return render()}
+  const a=b.dataset.act;
+  if(a==='home')return start();
+  if(a==='sim')return ueben('sim');
+  if(a==='mix')return ueben('mix');
+  if(a==='check')return check();
+  if(a==='reset'){sess.picked=[];return render()}
+  if(a==='next'){sess.i++;sess.pool=null;return next()}
+  if(a==='result')return result();
+});
+hud();start();
+</script>
+
+</body>
+</html>
