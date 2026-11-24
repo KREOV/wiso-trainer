@@ -1,6 +1,6 @@
 {
-  "name": "WiSo Quest",
-  "short_name": "WiSo Quest",
+  "name": "Crashkurs IHK",
+  "short_name": "Crashkurs IHK",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
