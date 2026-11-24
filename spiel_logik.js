@@ -96,7 +96,7 @@ function pruefen(){
   R.done=true;R.res.push(ok);
   let plus=0;
   if(ok){R.richtig++;R.combo++;S.serie++;S.best=Math.max(S.best,S.serie);const m=R.combo>=5?3:R.combo>=3?2:1;plus=10*m;R.xp+=plus;S.xp+=plus;tonOk();konfetti(R.combo>=3?140:70)}
-  else{R.combo=0;S.serie=0;if(!R.boss)R.herz--;tonBad();const qc=$('#qc');qc.classList.remove('shake');void qc.offsetWidth;qc.classList.add('shake')}
+  else{R.combo=0;S.serie=0;if(!R.boss){R.herz--;const h=document.querySelector('.hearts');if(h)h.innerHTML=[0,1,2].map(i=>i<R.herz?'♥':'<span class="off">♥</span>').join('')}tonBad();const qc=$('#qc');qc.classList.remove('shake');void qc.offsetWidth;qc.classList.add('shake')}
   save();
   const ende=R.i+1>=R.n||R.herz<=0;
   $('#chk').hidden=true;$('#sp').hidden=false;
