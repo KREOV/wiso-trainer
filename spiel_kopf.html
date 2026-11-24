@@ -7,7 +7,7 @@
   --bg1:#DDF0FF; --bg2:#FFE9F7; --ink:#1E1B4B; --muted:#6B6893; --card:#FFFFFF; --line:#E6E3F5;
   --ok:#22C55E; --ok-d:#15803D; --ok-bg:#E8FBEF; --bad:#F43F5E; --bad-d:#BE123C; --bad-bg:#FFE8EC;
   --gold:#FFC531; --gold-d:#D99A00; --pri:#6D4AFF; --pri-d:#4B2DD6;
-  --w1:#FF5A5F; --w1d:#D63A40; --w2:#3B82F6; --w2d:#1D5FD0; --w3:#10B981; --w3d:#0A8A60; --w4:#A855F7; --w4d:#7E2FD0; --w5:#FF9F1C; --w5d:#D27A00;
+  --w1:#FF5A5F; --w1d:#D63A40; --w2:#3B82F6; --w2d:#1D5FD0; --w3:#10B981; --w3d:#0A8A60; --w4:#A855F7; --w4d:#7E2FD0; --w5:#FF9F1C; --w5d:#D27A00; --w6:#06B6D4; --w6d:#0E7490;
   --f-d:"Fredoka","Nunito",system-ui,sans-serif; --f-b:"Nunito",system-ui,-apple-system,sans-serif;
   color-scheme:light;
 }
@@ -122,6 +122,40 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:50;width:100%;heigh
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 .sheet{cursor:default}
 *{-webkit-tap-highlight-color:transparent}
+
+/* Echte Aufgaben */
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}.tags .tag{margin:0}
+.tag.src{background:#EEF0FF;color:var(--ink)} .tag.typ{background:var(--ink)}
+.sit{background:#F6F5FF;border-radius:16px;padding:12px 14px;margin:8px 0 10px;font-size:17px;line-height:1.5;color:#3A376B;border-left:6px solid var(--c)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.chip{display:flex;align-items:center;gap:10px;background:var(--card);border:3px solid var(--line);border-radius:16px;padding:8px 12px 8px 8px;box-shadow:0 4px 0 var(--line);font-size:16px;font-weight:800;text-align:left;touch-action:none;user-select:none;-webkit-user-select:none;max-width:100%}
+.chip .n,.row .slot,.sitem .n{width:36px;height:36px;border-radius:11px;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--f-d);flex:none;font-size:18px}
+.chip.sel{border-color:var(--c);box-shadow:0 4px 0 var(--cd);transform:translateY(-3px)}
+.ghost{position:fixed;z-index:60;pointer-events:none;transform:rotate(-3deg) scale(1.06);box-shadow:0 14px 30px rgba(30,27,75,.3)!important;border-color:var(--c)!important;margin:0}
+.rows{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.row{display:flex;align-items:center;gap:14px;text-align:left;background:var(--card);border:3px dashed #CFCBEA;border-radius:18px;padding:12px 14px;font-size:17px;font-weight:800}
+.row .slot{background:#F1EFFD;color:var(--muted);width:auto;min-width:44px;padding:0 8px;height:44px;font-size:20px;gap:6px}
+.row.filled{border-style:solid;border-color:var(--c)} .row.filled .slot{background:var(--c);color:#fff}
+.row.hover{background:#F4F2FF;border-color:var(--c);transform:scale(1.02)}
+.row.right{border:3px solid var(--ok);background:var(--ok-bg)} .row.right .slot{background:var(--ok);color:#fff}
+.row.wrong{border:3px solid var(--bad);background:var(--bad-bg)} .row.wrong .slot{background:var(--bad);color:#fff}
+.row .slot s{opacity:.7;font-size:15px}
+.pop{animation:pop2 .3s}@keyframes pop2{50%{transform:scale(1.04)}}
+.sortlist{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.sitem{display:flex;align-items:center;gap:12px;background:var(--card);border:3px solid var(--line);border-radius:18px;padding:12px;box-shadow:0 5px 0 var(--line);font-size:17px;font-weight:800;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;position:relative}
+.sitem .t{flex:1;min-width:0}
+.sitem .grip{font-size:22px;color:var(--muted);flex:none}
+.sitem .mv{display:flex;flex-direction:column;gap:4px;flex:none}
+.sitem .mv button{width:40px;height:30px;border-radius:9px;background:#F1EFFD;font-size:14px;color:var(--ink)}
+.sitem.drag{z-index:5;border-color:var(--c);box-shadow:0 14px 28px rgba(30,27,75,.25);cursor:grabbing;transition:none}
+.sitem.right{border-color:var(--ok);background:var(--ok-bg)} .sitem.right .n{background:var(--ok)}
+.sitem.wrong{border-color:var(--bad);background:var(--bad-bg)} .sitem.wrong .n{background:var(--bad)}
+.btn.exam{display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:left}
+.btn.exam small{font-family:var(--f-b);font-size:14px;color:var(--muted);font-weight:700}
+.fehler{text-align:left;max-width:620px;margin:10px auto 0}
+.fehler h3{font-family:var(--f-d);font-size:22px;margin:0 0 8px}
+.fz{background:var(--card);border-radius:16px;padding:12px 14px;margin-bottom:10px;border-left:7px solid var(--c);box-shadow:0 4px 0 var(--line);font-size:15px;line-height:1.45}
+.fz b{display:block;font-size:16px;margin-bottom:2px}
 </style>
 
 <canvas id="fx"></canvas>

@@ -12,7 +12,10 @@ function parseNum(s){s=String(s).trim().replace(/\\s|%|€/g,'');if(s.includes('
 '''
 kopf=open(os.path.join(H,'spiel_kopf.html'),encoding='utf-8').read()
 logik=open(os.path.join(H,'spiel_logik.js'),encoding='utf-8').read()
-seite=kopf+'\n<script>\n'+gen+extra+logik+'\n</script>\n'
+import json
+AUF=json.load(open(os.path.join(H,'aufgaben.json'),encoding='utf-8'))
+auf='const AUF='+json.dumps(AUF,ensure_ascii=False,separators=(',',':'))+';\n'
+seite=kopf+'\n<script>\n'+gen+extra+auf+logik+'\n</script>\n'
 open(VAULT,'w',encoding='utf-8').write(seite)
 i=seite.index('</style>')+len('</style>')
 head='<!doctype html>\n<html lang="de">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<meta name="apple-mobile-web-app-capable" content="yes">\n<meta name="apple-mobile-web-app-title" content="WiSo Quest">\n<meta name="robots" content="noindex">\n<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">\n<meta name="mobile-web-app-capable" content="yes">\n<meta name="theme-color" content="#5b6cff">\n<link rel="manifest" href="manifest.webmanifest">\n<link rel="apple-touch-icon" href="apple-touch-icon.png">\n<link rel="icon" href="icon-192.png">\n'
