@@ -622,6 +622,601 @@
   "erklaerung": "Gibt die EZB beim Tender mehr Geld aus, gibt es mehr Geld im Markt, und die Zinsen sinken eher. Weniger Zuteilung bremst Kredite, niedrigere Zinsen verbilligen Kredite, Wertpapierkäufe der EZB bringen den Banken Geld. Negativzinsen sollen Banken zu mehr Krediten bewegen. Merksatz: Mehr Geld von der EZB heißt billigeres Geld."
  },
  {
+  "id": "S22-1",
+  "pruefung": "Sommer 2022",
+  "nr": 1,
+  "welt": "recht",
+  "thema": "Öffentliches und privates Recht",
+  "typ": "mc",
+  "frage": "Welcher Fall gehört zum öffentlichen Recht?",
+  "optionen": [
+   "Die Büroblitz GmbH beantragt beim Amtsgericht einen Mahnbescheid gegen die Johann Stifter KG wegen einer offenen Rechnung.",
+   "Lisa Helbricht wehrt sich bei der Bußgeldstelle gegen die Höhe ihres Bußgelds wegen zu schnellen Fahrens.",
+   "Jürgen Möller verklagt die Kreditbank AG, weil sie seinen hoch verzinsten Prämiensparvertrag gekündigt hat.",
+   "Clarisa Schreiber legt bei ihrer privaten Krankenversicherung Widerspruch ein, weil eine Kur abgelehnt wurde.",
+   "Ein Konkurrent verklagt die Lecker-Kiste GmbH, damit sie eine unlautere Werbung unterlässt."
+  ],
+  "richtig": [
+   1
+  ],
+  "erklaerung": "Beim öffentlichen Recht steht der Staat über dem Bürger und bestimmt. Die Bußgeldstelle ist eine Behörde, Frau Helbricht muss sich an die Regeln halten. In allen anderen Fällen streiten gleichberechtigte Partner, das ist Privatrecht, auch wenn ein Gericht dabei ist. Merksatz: Behörde gegen Bürger ist öffentliches Recht."
+ },
+ {
+  "id": "S22-2",
+  "pruefung": "Sommer 2022",
+  "nr": 2,
+  "welt": "recht",
+  "thema": "Nichtige und anfechtbare Rechtsgeschäfte",
+  "typ": "zuordnen",
+  "frage": "Welche rechtliche Wirkung hat die Willenserklärung jeweils?",
+  "kategorien": [
+   "Uneingeschränkt wirksam",
+   "Wirksam, aber anfechtbar",
+   "Nichtig"
+  ],
+  "aussagen": [
+   {
+    "t": "Gisela Hülst übernimmt per E-Mail gegenüber der Kreditbank AG eine selbstschuldnerische Bürgschaft für den Privatkredit ihrer 26-jährigen Tochter.",
+    "k": 2
+   },
+   {
+    "t": "Eine Mitarbeiterin der Kreditbank AG vertippt sich bei der Bestellnummer und bestellt weißes Kopierpapier statt Recyclingpapier.",
+    "k": 1
+   },
+   {
+    "t": "Felix Huber, 79, hat einen Betreuer ohne Einwilligungsvorbehalt und beauftragt die Bank, einen Teil seines Sparguthabens in eine Aktienanleihe anzulegen.",
+    "k": 0
+   }
+  ],
+  "erklaerung": "Eine Bürgschaft von Privatleuten braucht Papier mit Unterschrift, eine E-Mail reicht nicht: Formfehler, also nichtig. Der Tippfehler ist ein Erklärungsirrtum, das Geschäft gilt erst einmal, kann aber angefochten werden. Ein Betreuter ohne Einwilligungsvorbehalt bleibt voll geschäftsfähig, sein Auftrag gilt. Merksatz: Formfehler macht nichtig, Irrtum macht anfechtbar."
+ },
+ {
+  "id": "S22-3",
+  "pruefung": "Sommer 2022",
+  "nr": 3,
+  "welt": "recht",
+  "thema": "Geschäftsfähigkeit Minderjähriger",
+  "typ": "mc",
+  "frage": "Welches Geschäft eines Minderjährigen ist auch ohne Zustimmung der Eltern wirksam?",
+  "optionen": [
+   "Annalena, 16, Azubi bei der Kreditbank AG, schließt bei den Verkehrsbetrieben ein Jahresabo ab.",
+   "Leon, 15, kauft von seinen frei verfügbaren Ersparnissen Fußballschuhe für 60,00 EUR.",
+   "Benny, 17, Azubi bei der Kreditbank AG, kündigt seine Ausbildung, weil er Mechatroniker werden will.",
+   "Sophia, 9, kauft Kopfhörer für 29,99 EUR vom Geburtstagsgeld der Patentante, von dem die Eltern nichts wissen.",
+   "Marek, 14, vereinbart mit einem Supermarkt ein einwöchiges Pflichtpraktikum der Schule."
+  ],
+  "richtig": [
+   1
+  ],
+  "erklaerung": "Das ist der Taschengeldparagraf (§ 110 BGB): Leon bezahlt sofort mit Geld, das ihm zur freien Verfügung gehört. Sophias Geld zählt nicht, weil die Eltern nichts davon wissen. Abo, Kündigung der Ausbildung und Schulpraktikum brauchen die Zustimmung der Eltern, § 113 BGB gilt nur für Arbeitsverhältnisse. Merksatz: Taschengeld wirkt nur, wenn sofort und mit erlaubtem Geld bezahlt wird."
+ },
+ {
+  "id": "S22-4",
+  "pruefung": "Sommer 2022",
+  "nr": 4,
+  "welt": "recht",
+  "thema": "Besitz und Eigentum",
+  "typ": "mc",
+  "situation": "Rebecca Klüner kauft am 02.05.2022 im Fahrradladen Radlkette ein E-Bike für 2.338,00 EUR und bezahlt sofort. Abholen will sie es erst am 04.05.2022, bis dahin steht es im Laden.",
+  "frage": "Wie sind Besitz und Eigentum am 02.05.2022 nach der Zahlung verteilt?",
+  "optionen": [
+   "Frau Klüner ist Eigentümerin, aber nicht Besitzerin.",
+   "Frau Klüner ist Eigentümerin und Besitzerin.",
+   "Frau Klüner ist Besitzerin, aber nicht Eigentümerin.",
+   "Der Laden ist Besitzer, aber nicht Eigentümer.",
+   "Der Laden ist Eigentümer und Besitzer."
+  ],
+  "richtig": [
+   4
+  ],
+  "erklaerung": "Bei beweglichen Sachen wechselt das Eigentum erst mit Einigung und Übergabe, Bezahlen allein reicht nicht. Solange das Rad im Laden steht, hat der Laden es in der Hand (Besitz) und es gehört ihm noch (Eigentum). Hinweis: In der echten Prüfung wurde diese Aufgabe nicht gewertet. Merksatz: Besitz heißt haben, Eigentum heißt gehören."
+ },
+ {
+  "id": "S22-5",
+  "pruefung": "Sommer 2022",
+  "nr": 5,
+  "welt": "recht",
+  "thema": "Verbrauchsgüterkauf und Mängel",
+  "typ": "mc",
+  "situation": "Die Büroblitz GmbH verkauft auch an Privatleute.",
+  "frage": "Was muss ein Endverbraucher beim Verbrauchsgüterkauf beachten, um seine Rechte bei einer mangelhaften Lieferung zu sichern?",
+  "optionen": [
+   "Er muss die Ware sofort prüfen und offene Mängel unverzüglich melden.",
+   "Er muss die Ware unverzüglich prüfen und versteckte Mängel sofort nach Entdeckung melden.",
+   "Rechte wegen versteckter Mängel hat er nur, wenn sie sich innerhalb der gesetzlichen Verjährungsfrist zeigen.",
+   "Zurücktreten kann er nur, wenn er den Mangel innerhalb eines Jahres schriftlich meldet.",
+   "Er muss die Ware in angemessener Frist nach Entdeckung zusammen mit der Mängelrüge zurückschicken."
+  ],
+  "richtig": [
+   2
+  ],
+  "erklaerung": "Ein Verbraucher muss die Ware nicht sofort prüfen und Mängel nicht sofort melden, das gilt nur, wenn beide Seiten Kaufleute sind. Er muss aber innerhalb der Verjährung handeln, bei neuen Sachen 2 Jahre ab Übergabe. Rücktritt ist nur ein nachrangiges Recht. Merksatz: Verbraucher hat Zeit, aber nicht ewig."
+ },
+ {
+  "id": "S22-6",
+  "pruefung": "Sommer 2022",
+  "nr": 6,
+  "welt": "recht",
+  "thema": "Zahlungsverzug, 30-Tage-Regel",
+  "typ": "mc",
+  "situation": "Die Kreditbank AG kauft 96 Flaschen Wein bei der Weingut Janine und Felix Meinhardt KG. Wein und Rechnung über 846,90 EUR kommen am Dienstag, 03.05.2022. Auf der Rechnung steht: zahlbar sofort nach Eingang, Eigentumsvorbehalt bis zur vollständigen Zahlung.",
+  "frage": "Mit Ablauf welches Tages muss die Bank spätestens gezahlt haben, um nicht in Zahlungsverzug zu kommen?",
+  "optionen": [
+   "03.05.2022",
+   "17.05.2022",
+   "02.06.2022",
+   "03.06.2022",
+   "02.07.2022"
+  ],
+  "richtig": [
+   2
+  ],
+  "erklaerung": "„Sofort fällig“ ist kein fester Kalendertag, und gemahnt wurde nicht. Dann gilt die Regel aus § 286 BGB: Verzug spätestens 30 Tage nach Fälligkeit und Zugang der Rechnung. 03.05.2022 plus 30 Tage ergibt den 02.06.2022. Merksatz: Ohne Datum und ohne Mahnung zählt die 30-Tage-Regel."
+ },
+ {
+  "id": "S22-7",
+  "pruefung": "Sommer 2022",
+  "nr": 7,
+  "welt": "recht",
+  "thema": "Eigentumsvorbehalt",
+  "typ": "mc",
+  "situation": "Die Büroblitz GmbH bestellt im April 2022 ein mobiles Klimagerät für 499,00 EUR bei der KlimaCool AG und bekommt es geliefert. Laut AGB der KlimaCool AG gilt ein Eigentumsvorbehalt.",
+  "frage": "Welche Aussage zum Eigentumsvorbehalt nach BGB stimmt?",
+  "optionen": [
+   "Durch den Eigentumsvorbehalt gehen Besitz und Eigentum schon mit der Lieferung auf die Büroblitz GmbH über.",
+   "Mit dem Eigentumsvorbehalt schützt sich die KlimaCool AG vor dem gesetzlichen Widerrufsrecht des Käufers.",
+   "Die Büroblitz GmbH darf das Gerät bis zur Zahlung nicht bilanzieren, weil es ihr noch nicht gehört.",
+   "Die Büroblitz GmbH ist bis zur Zahlung treuhänderische Eigentümerin des Geräts.",
+   "Mit der Zahlung des Kaufpreises wird die Büroblitz GmbH Eigentümerin des Geräts."
+  ],
+  "richtig": [
+   4
+  ],
+  "erklaerung": "Mit der Lieferung bekommt der Käufer nur den Besitz. Das Eigentum bleibt beim Verkäufer, bis alles bezahlt ist, erst dann gehört das Gerät dem Käufer. Bilanzieren darf der Käufer es trotzdem, weil er wirtschaftlich schon der Eigentümer ist. Merksatz: Erst zahlen, dann gehören."
+ },
+ {
+  "id": "S22-8",
+  "pruefung": "Sommer 2022",
+  "nr": 8,
+  "welt": "arbeit",
+  "thema": "Arbeits- und Gesundheitsschutz",
+  "typ": "mc",
+  "frage": "Mit welcher Maßnahme fördert die Kreditbank AG den Arbeits- und Gesundheitsschutz ihrer Beschäftigten unmittelbar?",
+  "optionen": [
+   "Führungskräfte müssen jeden Arbeitsunfall sofort dem Betriebsrat melden.",
+   "Die Bank veröffentlicht jedes Jahr, wie sich die Fehltage durch Arbeitsunfälle entwickeln.",
+   "Alle Beschäftigten müssen einmal im Jahr die Anweisung zum Verhalten bei Banküberfällen lesen.",
+   "Die Bank bietet ein Seminar mit Bewegungsübungen am Arbeitsplatz für bessere Fitness an.",
+   "Ein externes Unternehmen erstellt die gesetzlich vorgeschriebene Gefährdungsbeurteilung."
+  ],
+  "richtig": [
+   3
+  ],
+  "erklaerung": "Nur die Bewegungsübungen tun dem Körper direkt etwas Gutes. Melden, Statistik, Lesen und Gefährdungsbeurteilung sind nützlich, wirken aber nur auf Umwegen. Merksatz: Unmittelbar heißt, es kommt direkt beim Menschen an."
+ },
+ {
+  "id": "S22-9",
+  "pruefung": "Sommer 2022",
+  "nr": 9,
+  "welt": "sozial",
+  "thema": "Umweltzeichen",
+  "typ": "mc",
+  "situation": "Die Kreditbank AG kauft regelmäßig Büromaterial und will nur Waren, die mit hohem Umweltstandard hergestellt wurden. In der Prüfung waren die Zeichen als Bilder abgedruckt, hier stehen ihre Namen.",
+  "frage": "Welches Zeichen muss auf der Ware sein?",
+  "optionen": [
+   "Tidyman (Figur, die Abfall in einen Eimer wirft)",
+   "Blauer Engel",
+   "Grüner Punkt",
+   "Recycling-Zeichen aus drei Pfeilen im Dreieck",
+   "Warnzeichen mit Flamme (entzündbar)"
+  ],
+  "richtig": [
+   1
+  ],
+  "erklaerung": "Der Blaue Engel ist das Umweltzeichen für umweltfreundliche Produkte und Herstellung, vergeben nach festen Regeln einer unabhängigen Stelle. Tidyman, Grüner Punkt und die Recycling-Pfeile drehen sich nur um Müll und Entsorgung. Die Flamme warnt vor Feuergefahr. Merksatz: Blauer Engel heißt umweltfreundlich hergestellt."
+ },
+ {
+  "id": "S22-10",
+  "pruefung": "Sommer 2022",
+  "nr": 10,
+  "welt": "arbeit",
+  "thema": "Berufsbildungsgesetz",
+  "typ": "mc",
+  "situation": "Sven Reichert beginnt am 01.08.2022 seine Ausbildung zum Bankkaufmann bei der Kreditbank AG.",
+  "frage": "Welche Regel findet er im Berufsbildungsgesetz (BBiG)?",
+  "optionen": [
+   "Nach Feierabend müssen Azubis mindestens 12 Stunden am Stück frei haben, bevor sie wieder arbeiten.",
+   "Wer vorher 6 Monate Praktikum im Betrieb gemacht hat, braucht keine Probezeit.",
+   "Der Azubi kann jederzeit ohne Frist und ohne Grund kündigen.",
+   "Auf Antrag des Azubis kann die Ausbildung verlängert werden, wenn das nötig ist, um das Ziel zu erreichen.",
+   "Wer durchfällt, bleibt automatisch bis zur nächsten Wiederholungsprüfung in Ausbildung, höchstens ein Jahr."
+  ],
+  "richtig": [
+   3
+  ],
+  "erklaerung": "Verkürzen und verlängern geht auf Antrag des Azubis, wenn es nötig ist. Die 12 Stunden Ruhe stehen im Jugendarbeitsschutzgesetz, nicht im BBiG. Probezeit gibt es immer (1 bis 4 Monate), fristlos ohne Grund kündigen geht nur in der Probezeit. Nach dem Durchfallen verlängert sich die Ausbildung nur, wenn der Azubi es verlangt. Merksatz: Verlängern gibt es auf Wunsch, nicht automatisch."
+ },
+ {
+  "id": "S22-11",
+  "pruefung": "Sommer 2022",
+  "nr": 11,
+  "welt": "arbeit",
+  "thema": "Jugendarbeitsschutz, Ruhepausen",
+  "typ": "zahl",
+  "situation": "Simone Förster ist 17 und Azubi in einer Filiale der Kreditbank AG. Am Montag, 09.05.2022, ist sie von 08:00 bis 16:30 Uhr eingeplant, die Pausen sind schon eingerechnet. Laut JArbSchG gilt: über 4,5 bis 6 Stunden Arbeit mindestens 30 Minuten Pause, über 6 Stunden mindestens 60 Minuten.",
+  "frage": "Wie viele Minuten Ruhepause muss sie am Montag mindestens bekommen?",
+  "loesung": 60,
+  "einheit": "Minuten",
+  "toleranz": 0,
+  "rechenweg": "08:00 bis 16:30 Uhr sind 8,5 Stunden, also mehr als 6 Stunden Arbeit, deshalb mindestens 60 Minuten Pause.",
+  "erklaerung": "Jugendliche brauchen bei mehr als 6 Stunden Arbeit mindestens 60 Minuten Pause. Am Montag arbeitet Simone deutlich mehr als 6 Stunden. Als Pause zählt nur, was mindestens 15 Minuten am Stück dauert. Merksatz: Jugendliche über 6 Stunden, eine Stunde Pause."
+ },
+ {
+  "id": "S22-12",
+  "pruefung": "Sommer 2022",
+  "nr": 12,
+  "welt": "arbeit",
+  "thema": "Tarifvertrag, Günstigkeitsprinzip",
+  "typ": "mc",
+  "situation": "Die Büroblitz GmbH ist Mitglied im Arbeitgeberverband und damit tarifgebunden. Der Tarifvertrag hat keine Öffnungsklauseln.",
+  "frage": "Was bedeutet die Tarifbindung für die Büroblitz GmbH?",
+  "optionen": [
+   "In einer wirtschaftlichen Notlage darf sie zum Nachteil der Beschäftigten vom Tarifvertrag abweichen, um die Firma zu retten.",
+   "Mit Beschäftigten ohne Gewerkschaft darf sie keine besseren Bedingungen als im Tarifvertrag vereinbaren.",
+   "Bessere Bedingungen als im Tarifvertrag darf sie nur mit allen oder mit keinem Beschäftigten vereinbaren.",
+   "Sie darf vom Tarifvertrag abweichen, wenn die Einzelvereinbarung für den Beschäftigten günstiger ist.",
+   "Sie darf den Tarifvertrag nur für Gewerkschaftsmitglieder unmittelbar und zwingend anwenden."
+  ],
+  "richtig": [
+   3
+  ],
+  "erklaerung": "Der Tarifvertrag ist eine Untergrenze. Mehr geht immer, zum Beispiel mehr Urlaub, weniger nicht, auch nicht in der Not. Das gilt für jeden Einzelnen, egal ob in der Gewerkschaft oder nicht. Merksatz: Günstigkeitsprinzip, besser darf es immer sein."
+ },
+ {
+  "id": "S22-13",
+  "pruefung": "Sommer 2022",
+  "nr": 13,
+  "welt": "sozial",
+  "thema": "Rentenversicherung",
+  "typ": "zahl",
+  "situation": "Der Bundestag diskutiert, den Rentenbeitrag von 18,6 % auf 20,0 % zu erhöhen, Arbeitgeber und Arbeitnehmer tragen ihn je zur Hälfte. Leon Gabitzke verdient 4.600,00 EUR brutto im Monat. Die Beitragsbemessungsgrenze liegt 2022 bei 7.050,00 EUR im Monat.",
+  "frage": "Um wie viel EUR würde sein monatlicher Arbeitnehmeranteil zur Rentenversicherung steigen?",
+  "loesung": 32.2,
+  "einheit": "EUR",
+  "toleranz": 0.01,
+  "rechenweg": "Erhöhung 20,0 % minus 18,6 % = 1,4 %, davon trägt er die Hälfte: 0,7 %. 4.600,00 EUR × 0,7 % = 32,20 EUR (Gehalt liegt unter der Grenze).",
+  "erklaerung": "Der Beitrag wird halbiert, also trägt Herr Gabitzke nur 0,7 % mehr. Sein Gehalt liegt unter der Beitragsbemessungsgrenze, deshalb zählt das ganze Gehalt. Werte Stand 2022, heute gelten andere Grenzen. Merksatz: Erst die Erhöhung halbieren, dann aufs Brutto rechnen."
+ },
+ {
+  "id": "S22-14",
+  "pruefung": "Sommer 2022",
+  "nr": 14,
+  "welt": "sozial",
+  "thema": "Arbeitnehmer-Pauschbetrag",
+  "typ": "mc",
+  "frage": "Die Bundesregierung diskutiert, den Arbeitnehmer-Pauschbetrag zu erhöhen. Welche Folgerung stimmt?",
+  "optionen": [
+   "Liegen die nachgewiesenen Werbungskosten unter dem Pauschbetrag, sinkt durch die Erhöhung das zu versteuernde Einkommen.",
+   "Die Erhöhung lässt das zu versteuernde Einkommen steigen.",
+   "Nach der Erhöhung muss man Werbungskosten bis zur neuen Grenze mit Belegen nachweisen.",
+   "Den neuen Pauschbetrag bekommt man nur, wenn man ihn in der Steuererklärung ausdrücklich beantragt.",
+   "Die Steuer sinkt nur, wenn man höhere Werbungskosten als den neuen Pauschbetrag nachweist."
+  ],
+  "richtig": [
+   0
+  ],
+  "erklaerung": "Den Pauschbetrag zieht das Finanzamt automatisch ab, ohne Belege und ohne Antrag. Wird er größer, bleibt weniger zu versteuern übrig, auch wenn man eigentlich weniger Werbungskosten hatte. 2022 stieg er von 1.000 auf 1.200 EUR (Stand 2022, heute höher). Merksatz: Pauschbetrag gibt es immer, auch ohne Zettel."
+ },
+ {
+  "id": "S22-15",
+  "pruefung": "Sommer 2022",
+  "nr": 15,
+  "welt": "arbeit",
+  "thema": "Jugend- und Auszubildendenvertretung",
+  "typ": "multi",
+  "situation": "In der Kreditbank AG wird eine neue Jugend- und Auszubildendenvertretung (JAV) gewählt.",
+  "frage": "Welche zwei Beschäftigten dürfen sich zur Wahl in die JAV stellen?",
+  "optionen": [
+   "Roger Metzler, 21, Azubi im 1. Ausbildungsjahr",
+   "Karola Haberer, 25, Angestellte mit befristetem Vertrag",
+   "Ghazi Dilmar, 23, Angestellter mit unbefristetem Vertrag, Mitglied im Betriebsrat",
+   "Matheus Ayrton, 28, Azubi im 2. Ausbildungsjahr",
+   "Emmy Maiser, 26, Angestellte unbefristet in Teilzeit",
+   "Mia Lautner, 16, Schülerpraktikantin für 2 Wochen"
+  ],
+  "richtig": [
+   0,
+   3
+  ],
+  "erklaerung": "Azubis dürfen sich unabhängig vom Alter in die JAV wählen lassen, deshalb Roger und auch Matheus mit 28. Andere Beschäftigte nur, solange sie noch nicht 25 sind. Wer im Betriebsrat sitzt, darf nicht zusätzlich in die JAV, und eine Schülerpraktikantin gehört nicht dazu. Merksatz: Azubi geht immer, sonst unter 25 und nicht im Betriebsrat."
+ },
+ {
+  "id": "S22-16",
+  "pruefung": "Sommer 2022",
+  "nr": 16,
+  "welt": "arbeit",
+  "thema": "Streik",
+  "typ": "mc",
+  "situation": "Im privaten Bankgewerbe lehnt die Gewerkschaft das Angebot der Arbeitgeber ab und denkt über einen Streik nach.",
+  "frage": "Welche Voraussetzung muss für einen rechtmäßigen Streik erfüllt sein?",
+  "optionen": [
+   "Ein Streik ist nur als letztes Mittel erlaubt und setzt voraus, dass der Arbeitgeber vorher aussperrt.",
+   "Mitstreiken dürfen nur Gewerkschaftsmitglieder, die in der Urabstimmung mit Ja gestimmt haben.",
+   "Die Kreditbank AG darf jederzeit bestreikt werden, wenn zwei Drittel der Gewerkschaftsmitglieder zustimmen.",
+   "Die Gewerkschaft kann mit Zustimmung von mindestens 75 % der Arbeitnehmer während der Schlichtung streiken.",
+   "Gestreikt werden darf erst, wenn die Verhandlungen gescheitert sind und ein Streikbeschluss vorliegt, der dem Arbeitgeber mitgeteilt wird."
+  ],
+  "richtig": [
+   4
+  ],
+  "erklaerung": "Solange ein Tarifvertrag gilt, herrscht Friedenspflicht. Erst wenn die Verhandlungen gescheitert sind und in der Urabstimmung 75 % der Gewerkschaftsmitglieder zustimmen, darf gestreikt werden, der Beschluss geht an die Arbeitgeber. Mitmachen dürfen dann alle Arbeitnehmer. Merksatz: Erst scheitern, dann abstimmen, dann streiken."
+ },
+ {
+  "id": "S22-17",
+  "pruefung": "Sommer 2022",
+  "nr": 17,
+  "welt": "arbeit",
+  "thema": "Elterngeld",
+  "typ": "mc",
+  "situation": "Simon Berger, 23, ist zum ersten Mal Vater geworden und fragt in der Personalabteilung der Kreditbank AG nach dem Elterngeld.",
+  "frage": "Welche Auskunft ist richtig?",
+  "optionen": [
+   "Fällt bei einem Elternteil das Einkommen weg, bekommen die Eltern zusammen 24 Monate Basiselterngeld.",
+   "Auch Eltern, die vor der Geburt kein eigenes Einkommen hatten, bekommen Elterngeld von 300,00 EUR.",
+   "Das Elterngeld richtet sich nach dem Nettoeinkommen im Geburtsjahr und beträgt höchstens 1.600,00 EUR im Monat.",
+   "Elterngeld hängt nicht vom Einkommen ab und wird nicht auf Arbeitslosengeld II oder Sozialhilfe angerechnet.",
+   "Basiselterngeld gibt es wahlweise als vollen Monatsbetrag oder als halben Betrag für doppelt so lange."
+  ],
+  "richtig": [
+   1
+  ],
+  "erklaerung": "Jeder bekommt mindestens 300 EUR Elterngeld im Monat, auch ohne Einkommen vorher. Sonst gibt es 65 bis 67 % des Nettos, höchstens 1.800 EUR, zusammen höchstens 14 Monate. Halber Betrag für doppelte Zeit heißt ElterngeldPlus, nicht Basiselterngeld. Stand 2022, und in der echten Prüfung wurde diese Aufgabe nicht gewertet. Merksatz: 300 EUR gibt es immer."
+ },
+ {
+  "id": "S22-18",
+  "pruefung": "Sommer 2022",
+  "nr": 18,
+  "welt": "markt",
+  "thema": "Käufermarkt",
+  "typ": "mc",
+  "situation": "Die Büroblitz GmbH verkauft auf einem hart umkämpften Markt für Büroartikel, auf dem die Kunden die stärkere Position haben.",
+  "frage": "In welchem Fall kann ein Käufermarkt vorliegen?",
+  "optionen": [
+   "Werbung ist überflüssig, weil gleich viele Anbieter wie Nachfrager da sind.",
+   "Viele Insolvenzen führen zu einem Nachfrageüberhang, weil es mehr Nachfrager als Anbieter gibt.",
+   "Das Angebot sinkt bei gleicher Nachfrage, es entsteht ein Angebotsdefizit.",
+   "Die knappe Ware bekommen die Nachfrager, die bei steigender Nachfrage am meisten zahlen.",
+   "Es wird zu viel produziert, die Waren lassen sich nicht alle an die Kunden verkaufen."
+  ],
+  "richtig": [
+   4
+  ],
+  "erklaerung": "Beim Käufermarkt gibt es mehr Ware als Käufer. Die Käufer können sich aussuchen, wo sie kaufen, und die Anbieter müssen um sie kämpfen. Zu wenig Ware und Kunden, die sich überbieten, das wäre ein Verkäufermarkt. Merksatz: Zu viel Ware, der Käufer ist König."
+ },
+ {
+  "id": "S22-19",
+  "pruefung": "Sommer 2022",
+  "nr": 19,
+  "welt": "markt",
+  "thema": "Preiselastizität der Nachfrage",
+  "typ": "mc",
+  "situation": "Die Büroblitz GmbH will ihre Preise erhöhen, um mehr Umsatz zu machen.",
+  "frage": "Unter welcher Voraussetzung klappt das?",
+  "optionen": [
+   "Die Nachfrage muss vollkommen elastisch sein, dann steigt durch die Preiserhöhung der Umsatz.",
+   "Bei vollkommen elastischer Nachfrage steigt der Umsatz durch die Preisänderung maximal.",
+   "Ist die Nachfrageelastizität kleiner als 1, kann die Preiserhöhung den Umsatz steigern.",
+   "Die Nachfrageelastizität muss genau 1 sein, damit der Umsatz steigt.",
+   "Die Angebotsmenge muss prozentual genauso stark sinken, wie der Preis steigt."
+  ],
+  "richtig": [
+   2
+  ],
+  "erklaerung": "Elastizität kleiner als 1 heißt: Die Kunden reagieren schwach, die Menge sinkt prozentual weniger, als der Preis steigt. Dann bleibt am Ende mehr Umsatz übrig. Bei vollkommen elastischer Nachfrage laufen bei jeder Preiserhöhung alle Kunden weg, bei genau 1 bleibt der Umsatz gleich. Merksatz: Unelastisch, Preis rauf, Umsatz rauf."
+ },
+ {
+  "id": "S22-20",
+  "pruefung": "Sommer 2022",
+  "nr": 20,
+  "welt": "markt",
+  "thema": "Angebots- und Nachfragekurve",
+  "typ": "mc",
+  "situation": "Die Entwicklung von Büro-Software wird für die Büroblitz GmbH teurer, deshalb steigt der Preis für ihre Kunden. Gezeigt ist ein normales Marktdiagramm mit steigender Angebotskurve und fallender Nachfragekurve.",
+  "frage": "Was passiert durch diese Preiserhöhung im Diagramm? Andere Einflüsse bleiben außen vor.",
+  "optionen": [
+   "Die Nachfragekurve verschiebt sich nach rechts.",
+   "Die Nachfragekurve verschiebt sich nach links.",
+   "Die Angebotskurve verschiebt sich nach rechts.",
+   "Die Angebotskurve verschiebt sich nach links.",
+   "Keine der beiden Kurven verschiebt sich."
+  ],
+  "richtig": [
+   3
+  ],
+  "erklaerung": "Höhere Kosten treffen den Anbieter. Er bietet zum gleichen Preis weniger an, also wandert die Angebotskurve nach links. Die Nachfragekurve bleibt, es wird nur weniger gekauft. Merksatz: Kosten rauf beim Anbieter, Angebotskurve nach links."
+ },
+ {
+  "id": "S22-21",
+  "pruefung": "Sommer 2022",
+  "nr": 21,
+  "welt": "markt",
+  "thema": "Gesetz gegen Wettbewerbsbeschränkungen",
+  "typ": "mc",
+  "frage": "In welchem Fall liegt ein Verstoß gegen das Gesetz gegen Wettbewerbsbeschränkungen (GWB) vor?",
+  "optionen": [
+   "Drei Entsorger einer Region bilden einen Konzern, um ihr Angebot günstiger und umfassender zu machen.",
+   "Ein Telefonanbieter, dem 10 % der Leitungen einer Region gehören, lässt einen Konkurrenten nicht auf seine Leitungen.",
+   "Ein Großhändler verkauft gut laufende Büroartikel längere Zeit unter Einstandspreis, um Marktanteile zu gewinnen.",
+   "Zwei kleine Bäckereien bündeln ihre Bestellungen beim Großhändler, um mehr Mengenrabatt zu bekommen.",
+   "Die Bewohner einer Kleinstadt können Trinkwasser nur von den Stadtwerken beziehen."
+  ],
+  "richtig": [
+   2
+  ],
+  "erklaerung": "Längere Zeit unter Einstandspreis verkaufen heißt Preisdumping. Damit sollen Konkurrenten aus dem Markt gedrängt werden, das verbietet das GWB. Mit 10 % der Leitungen ist der Telefonanbieter nicht marktbeherrschend, und kleine Bäckereien dürfen zusammen einkaufen. Merksatz: Dauerhaft unter Einkaufspreis ist Dumping und verboten."
+ },
+ {
+  "id": "S22-22",
+  "pruefung": "Sommer 2022",
+  "nr": 22,
+  "welt": "kon",
+  "thema": "Wachstumspolitik",
+  "typ": "mc",
+  "situation": "Die Bundesregierung will gegen das niedrige Wirtschaftswachstum etwas tun.",
+  "frage": "Welche Kombination von Maßnahmen ist dafür am besten geeignet?",
+  "optionen": [
+   "CO2-Steuer auf fossile Brennstoffe und gleichzeitig keine Subventionen mehr für Flugbenzin",
+   "Mehr Zuschuss für Weiterbildung bei Arbeitslosigkeit, bezahlt durch gleich hohe Kürzung von Arbeitslosengeld I und II",
+   "Höherer Spitzensteuersatz und gleichzeitig niedrigerer Grundfreibetrag bei der Einkommensteuer",
+   "Höherer Beitrag zur Arbeitslosenversicherung und höhere Beitragsbemessungsgrenze in der Rentenversicherung",
+   "Fördergeld für Entwicklung und Einsatz neuer Technologien, bezahlt mit neuen Staatsschulden"
+  ],
+  "richtig": [
+   4
+  ],
+  "erklaerung": "Fördergeld für neue Technik bringt Forschung und Investitionen in Gang, das schafft Wachstum. Weil es über Schulden bezahlt wird, nimmt man niemandem Geld weg. Alle anderen Kombinationen belasten Bürger oder Firmen oder schichten nur um, dann wird weniger gekauft. Merksatz: Wachstum braucht zusätzliches Geld, nicht umverteiltes."
+ },
+ {
+  "id": "S22-23",
+  "pruefung": "Sommer 2022",
+  "nr": 23,
+  "welt": "kon",
+  "thema": "Konjunkturindikatoren",
+  "typ": "mc",
+  "frage": "Welcher Indikator zeigt der Kreditbank AG die Konjunktur besonders früh an?",
+  "optionen": [
+   "Die Zahl der Insolvenzen von Start-up-Unternehmen",
+   "Der ifo-Geschäftsklimaindex",
+   "Das aktuelle Zinsniveau am Geld- und Kapitalmarkt",
+   "Der harmonisierte Verbraucherpreisindex",
+   "Die Arbeitslosenquote"
+  ],
+  "richtig": [
+   1
+  ],
+  "erklaerung": "Beim ifo-Index werden jeden Monat rund 7.000 Firmen nach Lage und Erwartungen gefragt, deshalb zeigt er früh, wohin es geht. Insolvenzen, Arbeitslosenquote und Preise reagieren erst später, sie sind Spätindikatoren. Das Zinsniveau zeigt nur die Gegenwart. Merksatz: Erwartungen sind Frühindikatoren."
+ },
+ {
+  "id": "S22-24",
+  "pruefung": "Sommer 2022",
+  "nr": 24,
+  "welt": "kon",
+  "thema": "Arbeitsmarktpolitik",
+  "typ": "mc",
+  "frage": "Welche staatliche Maßnahme senkt die aktuelle Arbeitslosenquote am besten?",
+  "optionen": [
+   "Das Rentenalter für Arbeitnehmer wird angehoben.",
+   "Grundfreibetrag und Spitzensteuersatz der Einkommensteuer werden erhöht.",
+   "Programme zur Weiterbildung der Erwerbstätigen werden ausgebaut.",
+   "Ein Ausbildungspakt schafft neue Ausbildungs- und Praktikumsstellen.",
+   "Kurzarbeitergeld wird kürzer gezahlt."
+  ],
+  "richtig": [
+   3
+  ],
+  "erklaerung": "Neue Ausbildungsstellen holen junge Leute direkt in Arbeit, die sonst arbeitssuchend wären. Ein höheres Rentenalter und kürzeres Kurzarbeitergeld machen eher mehr Menschen arbeitslos. Weiterbildung hilft denen, die schon Arbeit haben. Merksatz: Neue Stellen senken die Quote."
+ },
+ {
+  "id": "S22-25",
+  "pruefung": "Sommer 2022",
+  "nr": 25,
+  "welt": "kon",
+  "thema": "Erweiterter Wirtschaftskreislauf",
+  "typ": "zuordnen",
+  "situation": "Ein offener Wirtschaftskreislauf zeigt neun nummerierte Geldströme zwischen Unternehmen, privaten Haushalten, Staat, Kapitalsammelstellen und Ausland.",
+  "frage": "Welcher Geldstrom passt zu welchem Vorgang? Frag dich immer: Wer zahlt an wen?",
+  "kategorien": [
+   "1: Staat → Unternehmen",
+   "2: Private Haushalte → Staat",
+   "3: Unternehmen → Staat",
+   "4: Kapitalsammelstellen → Unternehmen",
+   "5: Private Haushalte → Ausland",
+   "6: Private Haushalte → Unternehmen",
+   "7: Ausland → Private Haushalte",
+   "8: Unternehmen → Private Haushalte",
+   "9: Private Haushalte → Kapitalsammelstellen"
+  ],
+  "aussagen": [
+   {
+    "t": "Die Büroblitz GmbH nimmt ihren Betriebsmittelkredit über 120.000,00 EUR bei der Kreditbank AG in Anspruch.",
+    "k": 3
+   },
+   {
+    "t": "Anna-Sophia Lehmann überweist für ihr Auslandssemester 5.000 US-Dollar Kaution an ihren Vermieter in den USA.",
+    "k": 4
+   },
+   {
+    "t": "Die Büroblitz GmbH zahlt 51.856,00 EUR Gewerbesteuer an das Finanzamt.",
+    "k": 2
+   },
+   {
+    "t": "Kai Mitschke kauft für seine Renovierung eine Bohrmaschine für 369,00 EUR.",
+    "k": 5
+   },
+   {
+    "t": "Leon Meißner bekommt von der Büroblitz GmbH 1.081,00 EUR Ausbildungsvergütung.",
+    "k": 7
+   }
+  ],
+  "erklaerung": "Schau nur, wer Geld abgibt und wer es bekommt. Die Bank ist eine Kapitalsammelstelle und gibt der Firma den Kredit (4), die Miete in den USA zahlt ein Haushalt ins Ausland (5), die Steuer geht von der Firma an den Staat (3). Der Einkauf geht vom Haushalt zur Firma (6), die Vergütung von der Firma zum Haushalt (8). Merksatz: Geld fließt immer vom Zahler zum Empfänger."
+ },
+ {
+  "id": "S22-26",
+  "pruefung": "Sommer 2022",
+  "nr": 26,
+  "welt": "kon",
+  "thema": "Verbraucherpreisindex, Kaufkraft",
+  "typ": "zahl",
+  "situation": "2019 bekamen die Beschäftigten der Kreditbank AG im Schnitt 45.124,50 EUR netto im Jahr. Der Verbraucherpreisindex (2015 = 100) lag 2019 bei 100,5, 2020 bei 102,0, 2021 bei 103,8 und 2022 bei 105,3.",
+  "frage": "Wie hoch müsste das durchschnittliche Jahresnettogehalt 2022 sein, damit der Kaufkraftverlust ausgeglichen ist?",
+  "loesung": 47279.7,
+  "einheit": "EUR",
+  "toleranz": 0.01,
+  "rechenweg": "45.124,50 EUR × 105,3 : 100,5 = 47.279,70 EUR",
+  "erklaerung": "Das Gehalt muss genauso stark steigen wie die Preise. Dafür teilt man durch den Index von 2019 und nimmt mal den Index von 2022, die Jahre dazwischen braucht man nicht. Merksatz: Neues Gehalt gleich altes Gehalt mal neuer Index durch alter Index."
+ },
+ {
+  "id": "S22-27",
+  "pruefung": "Sommer 2022",
+  "nr": 27,
+  "welt": "ezb",
+  "thema": "Leistungsbilanz und Außenbeitrag",
+  "typ": "mc",
+  "situation": "Saldo der Leistungsbilanz und darunter Außenbeitrag in Mrd. EUR (bereinigt): Dezember 2021: 22,07 und 3,34 · Januar 2022: 17,40 und 12,64 · Februar 2022: 10,5 und minus 1,51 · März 2022: 7,46 und 9,41.",
+  "frage": "Welche Aussage lässt sich aus den Zahlen ablesen?",
+  "optionen": [
+   "Im Februar 2022 wurden mehr Waren und Dienstleistungen importiert als exportiert.",
+   "Im Januar 2022 lagen die Exporte um 4,76 Mrd. EUR über den Importen.",
+   "Wegen höherer Importüberschüsse bei Waren und Dienstleistungen ist der Leistungsbilanzsaldo im März 2022 gesunken.",
+   "Der Außenbeitrag zeigt für Januar 2022 einen hohen Importüberschuss, der 72,6 % der Leistungsbilanz ausmacht.",
+   "Im Dezember 2021 waren die Warenexporte um 3,34 Mrd. EUR niedriger als die Importe."
+  ],
+  "richtig": [
+   0
+  ],
+  "erklaerung": "Der Außenbeitrag ist Exporte minus Importe von Waren und Dienstleistungen. Im Februar ist er negativ, also wurde mehr eingeführt als ausgeführt. Im Januar, März und Dezember ist er positiv, dort gab es Exportüberschüsse. Merksatz: Außenbeitrag im Minus heißt mehr Importe."
+ },
+ {
+  "id": "S22-28",
+  "pruefung": "Sommer 2022",
+  "nr": 28,
+  "welt": "ezb",
+  "thema": "EZB und ESZB",
+  "typ": "mc",
+  "frage": "Welche Aussage zur EZB oder zum Europäischen System der Zentralbanken (ESZB) stimmt?",
+  "optionen": [
+   "Die EZB ist abhängig, hat keine eigene Rechtspersönlichkeit und wird vom EU-Parlament politisch und finanziell kontrolliert.",
+   "Weil die EZB in Frankfurt sitzt, gilt für sie deutsches Recht und sie muss Weisungen der BaFin befolgen.",
+   "Das ESZB unterstützt die Wirtschaftspolitik der EU, soweit das Hauptziel Preisniveaustabilität nicht darunter leidet.",
+   "Zum ESZB gehören nur die EZB und die Zentralbanken der Länder mit dem Euro.",
+   "Die EZB beaufsichtigt alle Kreditinstitute mit Hauptsitz in einem EU-Staat."
+  ],
+  "richtig": [
+   2
+  ],
+  "erklaerung": "Das erste Ziel ist stabile Preise, erst danach hilft das ESZB der Wirtschaftspolitik der EU. Die EZB ist unabhängig und ein Organ der EU, die BaFin hat ihr nichts zu sagen. Zum ESZB gehören die Zentralbanken aller EU-Staaten, nur die Euro-Länder bilden das Eurosystem. Die EZB beaufsichtigt nur die großen Banken der Eurozone. Merksatz: Erst Preisstabilität, dann Wirtschaftspolitik."
+ },
+ {
   "id": "W2324-1",
   "pruefung": "Winter 2023/24",
   "nr": 1,
