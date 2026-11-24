@@ -450,6 +450,14 @@ input,textarea{-webkit-user-select:text;user-select:text;font-size:16px}
 .top{flex-wrap:nowrap}.top .lvl{flex:1 1 40px;min-width:0}.top .xpbar{min-width:16px}
 @media (max-width:440px){.top{gap:6px}.top .badge{padding:6px 8px;font-size:13px;gap:4px}.top .snd{width:36px;height:36px;font-size:16px;flex:none}.lvl .ring{width:36px;height:36px;font-size:16px}}
 #tabbar.weg{pointer-events:none;visibility:hidden;transition:transform .3s,visibility 0s .3s}
+/* Lesbarkeit der Schilder in beiden Modi */
+.tag.typ{background:#1E1B4B;color:#fff}
+.xp.minus{background:#fff;color:var(--bad-d);box-shadow:none}
+[data-theme=dark] .tag.src{background:rgba(255,255,255,.14);color:#EEEBFF}
+[data-theme=dark] .tag.typ,[data-theme=dark] .tag.modus{background:rgba(255,255,255,.9);color:#1E1B4B}
+[data-theme=dark] .fb.bad h3{color:#FF9FB2}[data-theme=dark] .fb.ok h3{color:#86EFAC}
+[data-theme=dark] .why b{color:#fff}[data-theme=dark] .qt{background:rgba(255,255,255,.1);color:var(--ink)}
+[data-theme=dark] .lbl{color:#B9B4E6}
 </style>
 </head>
 <body>
@@ -1325,7 +1333,7 @@ function pruefen(){
   save();
   const fertig=R.i+1>=R.n||R.herz<=0;
   chk.hidden=true;$('#sp').hidden=false;
-  layer(`<div class="fb ${ok?'ok':'bad'}" role="status"><div class="in"><div class="fbhead">${maskot(mood,hand,.15)}<h3>${esc(line)}</h3>${ok?`<span class="xp">+${plus} XP</span>`:(R.herz!==Infinity?`<span class="xp" style="background:#fff;box-shadow:none">−1 ♥</span>`:'')}</div>${info}<div class="why">💡 ${esc(q.erklaerung)}</div>
+  layer(`<div class="fb ${ok?'ok':'bad'}" role="status"><div class="in"><div class="fbhead">${maskot(mood,hand,.15)}<h3>${esc(line)}</h3>${ok?`<span class="xp">+${plus} XP</span>`:(R.herz!==Infinity?`<span class="xp minus">−1 ♥</span>`:'')}</div>${info}<div class="why">💡 ${esc(q.erklaerung)}</div>
   <div class="fbtools"><button class="qt" data-act="vorlesen-erkl" aria-label="Erklärung vorlesen">🔊 Vorlesen</button><button class="qt ${S.fav[q.id]?'on':''}" data-act="fav" aria-label="Merken">${S.fav[q.id]?'★ Gemerkt':'☆ Merken'}</button></div>
   <div class="btns"><button class="btn" style="--c:${ok?'var(--ok)':'var(--bad)'};--cd:${ok?'var(--ok-d)':'var(--bad-d)'}" data-act="${fertig?'ende':'weiter'}">${fertig?'Ergebnis':'Weiter'}</button></div></div></div>`);
 }
@@ -1692,6 +1700,7 @@ if('serviceWorker' in navigator){let erst=!navigator.serviceWorker.controller;na
 /* ---------- Los ---------- */
 themaSetzen();streakPflegen();ligaWoche();
 function direkt(){const h=new URLSearchParams(location.hash.slice(1));if(![...h.keys()].length)return false;try{
+  if(h.get('th')){S.thema=h.get('th');themaSetzen()}
   if(h.get('t'))zeigeTab(h.get('t'),true);else zeigeTab('pfad',true);
   if(h.get('s')&&SUBS[h.get('s')])sub(SUBS[h.get('s')]);
   if(h.get('m'))modus(h.get('m'),{dataset:{welt:h.get('w')||'recht'}});

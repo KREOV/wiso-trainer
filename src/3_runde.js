@@ -148,7 +148,7 @@ function pruefen(){
   save();
   const fertig=R.i+1>=R.n||R.herz<=0;
   chk.hidden=true;$('#sp').hidden=false;
-  layer(`<div class="fb ${ok?'ok':'bad'}" role="status"><div class="in"><div class="fbhead">${maskot(mood,hand,.15)}<h3>${esc(line)}</h3>${ok?`<span class="xp">+${plus} XP</span>`:(R.herz!==Infinity?`<span class="xp" style="background:#fff;box-shadow:none">−1 ♥</span>`:'')}</div>${info}<div class="why">💡 ${esc(q.erklaerung)}</div>
+  layer(`<div class="fb ${ok?'ok':'bad'}" role="status"><div class="in"><div class="fbhead">${maskot(mood,hand,.15)}<h3>${esc(line)}</h3>${ok?`<span class="xp">+${plus} XP</span>`:(R.herz!==Infinity?`<span class="xp minus">−1 ♥</span>`:'')}</div>${info}<div class="why">💡 ${esc(q.erklaerung)}</div>
   <div class="fbtools"><button class="qt" data-act="vorlesen-erkl" aria-label="Erklärung vorlesen">🔊 Vorlesen</button><button class="qt ${S.fav[q.id]?'on':''}" data-act="fav" aria-label="Merken">${S.fav[q.id]?'★ Gemerkt':'☆ Merken'}</button></div>
   <div class="btns"><button class="btn" style="--c:${ok?'var(--ok)':'var(--bad)'};--cd:${ok?'var(--ok-d)':'var(--bad-d)'}" data-act="${fertig?'ende':'weiter'}">${fertig?'Ergebnis':'Weiter'}</button></div></div></div>`);
 }

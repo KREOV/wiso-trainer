@@ -431,3 +431,11 @@ input,textarea{-webkit-user-select:text;user-select:text;font-size:16px}
 .top{flex-wrap:nowrap}.top .lvl{flex:1 1 40px;min-width:0}.top .xpbar{min-width:16px}
 @media (max-width:440px){.top{gap:6px}.top .badge{padding:6px 8px;font-size:13px;gap:4px}.top .snd{width:36px;height:36px;font-size:16px;flex:none}.lvl .ring{width:36px;height:36px;font-size:16px}}
 #tabbar.weg{pointer-events:none;visibility:hidden;transition:transform .3s,visibility 0s .3s}
+/* Lesbarkeit der Schilder in beiden Modi */
+.tag.typ{background:#1E1B4B;color:#fff}
+.xp.minus{background:#fff;color:var(--bad-d);box-shadow:none}
+[data-theme=dark] .tag.src{background:rgba(255,255,255,.14);color:#EEEBFF}
+[data-theme=dark] .tag.typ,[data-theme=dark] .tag.modus{background:rgba(255,255,255,.9);color:#1E1B4B}
+[data-theme=dark] .fb.bad h3{color:#FF9FB2}[data-theme=dark] .fb.ok h3{color:#86EFAC}
+[data-theme=dark] .why b{color:#fff}[data-theme=dark] .qt{background:rgba(255,255,255,.1);color:var(--ink)}
+[data-theme=dark] .lbl{color:#B9B4E6}

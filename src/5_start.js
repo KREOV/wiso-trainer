@@ -87,6 +87,7 @@ if('serviceWorker' in navigator){let erst=!navigator.serviceWorker.controller;na
 /* ---------- Los ---------- */
 themaSetzen();streakPflegen();ligaWoche();
 function direkt(){const h=new URLSearchParams(location.hash.slice(1));if(![...h.keys()].length)return false;try{
+  if(h.get('th')){S.thema=h.get('th');themaSetzen()}
   if(h.get('t'))zeigeTab(h.get('t'),true);else zeigeTab('pfad',true);
   if(h.get('s')&&SUBS[h.get('s')])sub(SUBS[h.get('s')]);
   if(h.get('m'))modus(h.get('m'),{dataset:{welt:h.get('w')||'recht'}});
