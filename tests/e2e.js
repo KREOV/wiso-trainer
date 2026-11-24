@@ -50,7 +50,7 @@ try{
   // Joker und Tipp
   S.inv.joker=2;S.knete=50;save();tap('[data-tab=ueben]');tap('[data-modus=zufall]');let jt=0;while(R&&R.q.typ!=='mc'&&jt++<12){loese(true)}
   if(R&&R.q&&R.q.typ==='mc'){tap('[data-act=joker]','joker');log.push('Joker: '+document.querySelectorAll('.ans.weg').length+' gestrichen');tap('[data-act=tipp]','tipp');log.push('Tipp: '+(!!$('.tippbox')))}
-  tap('[data-act=quit]');tap('#layer [data-act=quitja]','quitja');
+  tap('[data-act=quit]');if($('#layer [data-act=quitja]'))tap('#layer [data-act=quitja]','quitja');
   // Suche, Glossar, Formeln, Tipps
   tap('[data-tab=ueben]');tap('[data-modus=suche]');const sf=$('#sf');sf.value='Mutterschutz';sf.dispatchEvent(new Event('input'));log.push('Suche: '+$('#sz').textContent);
   runde('Einzel aus Suche',()=>tap('[data-einzel]'));
