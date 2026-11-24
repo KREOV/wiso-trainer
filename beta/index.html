@@ -1691,7 +1691,16 @@ if('serviceWorker' in navigator){let erst=!navigator.serviceWorker.controller;na
 
 /* ---------- Los ---------- */
 themaSetzen();streakPflegen();ligaWoche();
-zeigeTab('pfad',true);splash();
+function direkt(){const h=new URLSearchParams(location.hash.slice(1));if(![...h.keys()].length)return false;try{
+  if(h.get('t'))zeigeTab(h.get('t'),true);else zeigeTab('pfad',true);
+  if(h.get('s')&&SUBS[h.get('s')])sub(SUBS[h.get('s')]);
+  if(h.get('m'))modus(h.get('m'),{dataset:{welt:h.get('w')||'recht'}});
+  const d=h.get('d');if(d){const l=AUFG.filter(a=>a.typ===d||d==='fb'||d==='ende');starte({mode:'zufall',list:l.slice(0,10)});
+    if(d==='fb'){const q=R.q;if(q.typ==='mc'){document.querySelectorAll('.ans')[(q.richtig[0]+1)%q.optionen.length].click();pruefen()}}
+    if(d==='ende'){R.res=[1,1,1,0,1];R.richtig=4;R.i=4;R.list=R.list.slice(0,5);R.n=5;ende()}}
+  if(h.get('l')==='1'){const id=h.get('lek')||aktuell();if(LEK[id])lektionMenu(id)}
+  }catch(e){console.error(e)}return true}
+if(!direkt()){zeigeTab('pfad',true);splash()}
 
 /* ===================== Crashkurs IHK · Funktionsliste ===================== */
 const FEATURES=[
