@@ -6,9 +6,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="WiSo Quest">
 <meta name="robots" content="noindex">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#5b6cff">
+<meta name="theme-color" content="#DDF0FF">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
@@ -27,8 +27,9 @@
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 [hidden]{display:none!important}
-html,body{min-height:100%}
-body{margin:0;font-family:var(--f-b);font-weight:700;color:var(--ink);background:linear-gradient(160deg,var(--bg1),var(--bg2)) fixed;font-size:18px;
+html{min-height:100%;background:linear-gradient(160deg,var(--bg1),var(--bg2));background-color:var(--bg1)}
+body{min-height:100vh;min-height:100dvh}
+body{margin:0;font-family:var(--f-b);font-weight:700;color:var(--ink);background:transparent;font-size:18px;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-top:max(14px,calc(env(safe-area-inset-top,0px) + 8px));padding-bottom:max(40px,env(safe-area-inset-bottom,0px))}
 .wrap{max-width:760px;margin:0 auto}
 button{font:inherit;color:inherit;border:0;cursor:pointer;touch-action:manipulation}
